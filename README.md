@@ -4,7 +4,7 @@
 
 ### Objectives
 
-* Migrate the work started in 2014
+* Migrate the [work started in 2014](https://github.com/TheTyee/buylocal)
 * Abandon the need for Node and Mongo
 * Build on The Tyee [static app template](https://github.com/TheTyee/static-app-template)
 * Move toward a generic "Tyee Contests" template that can be re-skinned and re-deployed consistently and quickly
@@ -37,9 +37,3 @@ Next action:
 For the moment, there is a Google Drive folder called "Tyee - Contests - Buy Local 2015" that has a document for each "page," and a sheet for anything else (Prizes, Partners, Promos, etc.). 
 
 This is where the business team will be working on the contest's content. It's possible that we can bypass the step of "loading" this content into Jekyll using [Tabletop.js](https://github.com/jsoma/tabletop) and [Doctop.js](https://github.com/times/doctop) or simillar libraries that read from Drive (either on the client, or when the site is generated) -- so we should give that a try if there's enough time.
-
-
-
-
-
-
