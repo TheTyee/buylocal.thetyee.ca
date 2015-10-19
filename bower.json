@@ -1,0 +1,24 @@
+{
+  "name": "buylocal.thetyee.ca",
+  "version": "0.0.1",
+  "authors": [
+    "Sally Poulsen <spoulsen@thetyee.ca>",
+    "Phillip Smith <ps@phillipadsmith.com>"
+  ],
+  "description": "Buy Local Content 2015",
+  "license": "MIT",
+  "homepage": "buylocal.thetyee.ca",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "backbone": "~1.1.2",
+    "modernizr": "~2.8.3"
+  }
+}
