@@ -3,8 +3,8 @@ version: 0.0.1
 title: "Buy Local"
 description: "Send Holiday Greetings to your favourite local biz. (And win!)"
 baseurl: ""
-url: "http://buylocal.thetyee.ca"
-
+#url: "http://buylocal.thetyee.ca"
+url: "http://localhost:4000"
 # Project settings - Analytics
 analytics:
     ga_tracking_id: 'UA-12345-5'
