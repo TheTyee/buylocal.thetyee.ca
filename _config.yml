@@ -64,6 +64,7 @@ assets:
     - bower_components/underscore/
     - bower_components/backbone/
     - bower_components/bootstrap/dist/css/
+    - bower_components/instafeed.js/
   js_compressor: yui
   css_compressor: yui
   cache: true

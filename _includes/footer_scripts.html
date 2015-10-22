@@ -1,4 +1,14 @@
+{% javascript instafeed.min.js %}
 {% javascript app.js %}
+
+<script type="text/javascript">
+    var feed = new Instafeed({
+        get: 'tagged',
+        tagName: 'awesome',
+        clientId: 'ef196ee09982408eb01eb3580527c480'
+    });
+    feed.run();
+</script>
 
 {% if site.mode == 'development-w-grunt' %}
     <script src="//localhost:35729/livereload.js"></script>
