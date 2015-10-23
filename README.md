@@ -29,8 +29,13 @@ In the past, we've done this with [Backbone](http://backbonejs.org/), for an exa
 
 Submission data, stored in Wufoo, will be accessible to the JavaScript app via a simple passthrough-proxy (we'll want to check the latency on this, and if pagination is avaialble), or via a micro-service as [we've done in the past](https://github.com/phillipadsmith/widgets.thetyee.ca) that queries and returns data from PostgreSQL.
 
+**Decision**: Going to use a micro service and Wufoo webhooks to send data into the service because filtering is an issues, as well as pagination.
+
 Next action:
-- [ ] Sally will develop a quick MVP that queries Wufoo directly, and report back on speeed, paging, filtering, etc.
+- [X] Sally will develop a quick MVP that queries Wufoo directly, and report back on speeed, paging, filtering, etc.
+- [ ] Phillip will deploy a micro service that provides access to stored Wufoo entries, with filters and pagination
+- [ ] Phillip will bootstrap the Backbone app connected to the micro service
+
 
 #### Experiment: Content pulled in via DocTop & TableTop
 
