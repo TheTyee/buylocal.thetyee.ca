@@ -66,6 +66,8 @@ assets:
     - bower_components/instafeed.js/
     - bower_components/bootstrap/dist/css/
     - bower_components/fontawesome/css/
+    - bower_components/less/
+    - bower_components/doctop/dist/
   js_compressor: yui
   css_compressor: yui
   cache: true
