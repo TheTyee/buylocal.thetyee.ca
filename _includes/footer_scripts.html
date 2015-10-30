@@ -1,13 +1,15 @@
 {% javascript instafeed.min.js %}
 {% javascript app.js %}
 
+
+
 <script type="text/javascript">
-    var feed = new Instafeed({
-        get: 'tagged',
-        tagName: 'awesome',
-        clientId: 'ef196ee09982408eb01eb3580527c480'
+    var userFeed = new Instafeed({
+        get: 'user',
+        userId: parseInt(417159344),
+        accessToken: '333678892.9897311.ce85a47091c34fd1af4ac9c1d6fb8e19'
     });
-    feed.run();
+    userFeed.run();
 </script>
 
 {% if site.mode == 'development-w-grunt' %}

@@ -2,7 +2,7 @@
 /* ==========================================================================
 CSS/LESS includes 
 ========================================================================== */
-//= require bootstrap.css
+@import "../../bower_components/bootstrap/less/bootstrap.less";
 
 
 /* ==========================================================================
@@ -629,12 +629,6 @@ a.vancity-learn-more, a.vancity-learn-more:visited {
     display: table;
     clear: both; }
 
-
-.business-card {
- &:extend(.col-md-6);
-background: red;
-}
-
 .greeting-card .holiday-card {
   padding: 1em;
   border-radius: 5px;
@@ -804,3 +798,51 @@ ul.menu li:last-child a {
 .intro p {
   color: #79219f;
   font-size: 1.8rem; }
+
+
+
+  /* New Code */
+
+/* VARIABLES */
+
+@ltgrey: #e5e5e5;
+@padding: 20px;
+@corner: 5px;
+
+/* LAYOUT */
+ section {
+  &:extend(.container);
+ } 
+
+ section {
+  &:extend(.row);
+ } 
+
+.red {
+  background: red;
+}
+
+  #instafeed {
+  .make-md-column(6);
+    
+  }
+
+
+.button-wrapper {
+   .make-md-column(12);
+}
+
+.main-content {
+   .make-md-column(10);
+}
+.sidebar {
+   .make-md-column(2);
+}
+
+.business-card {
+   .make-md-column(6);
+   border: solid 1px @ltgrey;
+   padding: @padding;
+   border-radius: @corner;
+}
+
