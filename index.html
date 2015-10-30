@@ -2,6 +2,48 @@
 layout: default
 ---
 
+
+<script>
+  $.doctop({
+    url: 'https://docs.google.com/document/d/16e7-MDmxmEuujZjcx5iCoPzjVMfH3jbTfPaYwpEYaMY/pub',
+    archieml: true,
+    cache: false,
+    callback: function(d){
+      //  console.log(d.copy);
+        view = d.copy;
+        allcontent= '';
+        //concantenate all the content so I don;t have to deal with it on a line by line basis.
+        for (var key in view) {
+		  if (view.hasOwnProperty(key)) {
+		    //console.log(key + " -> " + view[key]);
+		    allcontent += view[key]; 
+		  }
+		}
+		console.log(allcontent);
+        //console.log(view);
+        //template = $('#template').html();
+        //Mustache.parse(template);   // optional, speeds up future uses
+        //rendered = Mustache.render(template, view);
+        $('#about-copy').html(allcontent);
+    }
+  });
+</script>
+
+
+
+<script id="template" type="x-tmpl-mustache">
+
+{% raw %}
+<dl>
+
+<h3>{{{hed}}}</h3>
+<p>{{{content}}}</p>
+
+</dl>
+{% endraw %}
+</script>
+
+<section id="about-copy" class="about"></section>
 <section>
 <div class="button-wrapper">
 Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
@@ -9,7 +51,7 @@ Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
 
 <div class="main-content">
 
-{% for contest in site.data.contests %}
+{% for contest in site.data.contests limit:5%}
 {% include business_card.html%}
 {% endfor %}
 

@@ -68,6 +68,8 @@ assets:
     - bower_components/fontawesome/css/
     - bower_components/less/
     - bower_components/doctop/dist/
+    - bower_components/mustache/
+    - bower_components/archieml-js/
   js_compressor: yui
   css_compressor: yui
   cache: true

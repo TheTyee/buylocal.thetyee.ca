@@ -1,9 +1,27 @@
 ---
-permalink: /prizes/
+permalink: /enter-now/
 layout:    default
 title:     Enter Now
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper pretium tempor. Pellentesque vel ultrices odio. Suspendisse eu ornare justo. Mauris volutpat, mi eget ornare vestibulum, turpis nunc tempor libero, commodo sagittis purus nulla sed orci. Mauris consequat purus est, in semper elit pulvinar in. Fusce sit amet neque vehicula, aliquet purus vitae, consectetur ipsum. Praesent commodo purus rutrum congue interdum. Cras quis nisl ut eros finibus facilisis a vel diam. In est tellus, mattis sollicitudin tristique ac, bibendum a ipsum. Donec blandit fermentum rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut luctus, justo ac tempor eleifend, lectus ligula cursus nisl, et fermentum ex ex non mi. Integer et metus at dolor elementum dapibus at ut metus. Sed condimentum, ex sed hendrerit placerat, est nisl pharetra ligula, ut porta mi urna eget justo.
-
-Donec a elit vitae est rhoncus imperdiet. Praesent ut erat a justo sollicitudin lobortis. Nunc mattis massa sem, a tincidunt sem ultrices eget. Sed nulla nulla, blandit a lobortis vitae, lacinia in velit. In iaculis enim sed nunc rhoncus dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla mollis auctor mauris, at semper dui consectetur ac. Aliquam posuere facilisis pulvinar. Suspendisse potenti.
+<section>
+<div id="wufoo-z1wu3fc30hqoqic">
+Fill out my <a href="https://thetyee.wufoo.com/forms/z1wu3fc30hqoqic">online form</a>.
+</div>
+<script type="text/javascript">var z1wu3fc30hqoqic;(function(d, t) {
+var s = d.createElement(t), options = {
+'userName':'thetyee',
+'formHash':'z1wu3fc30hqoqic',
+'autoResize':true,
+'height':'1301',
+'async':true,
+'host':'wufoo.com',
+'header':'show',
+'ssl':true};
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { z1wu3fc30hqoqic = new WufooForm();z1wu3fc30hqoqic.initialize(options);z1wu3fc30hqoqic.display(); } catch (e) {}};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
+</section>
