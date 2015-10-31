@@ -5,18 +5,20 @@ title:     Readers' Cards
 ---
 
 <section>
+	<h2 class="heading">All cards</h2>
 <div class="button-wrapper">
 Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
 </div>
 
-<div class="main-content">
+<div class="card-content">
 
-{% for contest in site.data.contests %}
+{% for contest in site.data.contests limit: 10 %}
 {% include business_card.html%}
 {% endfor %}
 
 </div>
-<div class="sidebar">
-{% include sidebar.html %}
-</div>
+
 </section>
+<section>
+	1 | 2 | 3| 4 | 5| 6| 7| 
+	</section>
