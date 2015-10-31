@@ -1,1 +1,11 @@
+<aside>
+{% for prize in site.data.prizes %}
+	<a href="/prizes/">
+	<img src = "{{prize.Image}}" />
+	<p>{{prize.Businessname}}</p>
+	<p>{{prize.Text_Short}}</p>
+	</a>
+	
+{% endfor %}
+</aside>
 <div id="instafeed"></div>

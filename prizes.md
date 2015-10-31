@@ -8,13 +8,14 @@ title:     Prizes
 
 
 <div class="main-content">
-
+<h2 class="heading">Prizes</h2>
 {% for prize in site.data.prizes %}
-	<p>{{prize.Businessname}}</p>
+	<img src = "{{prize.Image}}" />
+	<p><a href="{{prize.Link}}">{{prize.Businessname}}</a></p>
 	<p>{{prize.Text_Short}}</p>
 	<p>{{prize.Text_Long}}</p>
 	<p>{{prize.Link}}</p>
-	<p>{{prize.Image}}</p>
+	
 {% endfor %}
 
 </div>
