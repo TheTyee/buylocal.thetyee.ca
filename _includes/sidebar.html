@@ -1,10 +1,12 @@
 <aside>
 {% for prize in site.data.prizes %}
+<div class="prize">
 	<a href="/prizes/">
 	<img src = "{{prize.Image}}" />
 	<p>{{prize.Businessname}}</p>
 	<p>{{prize.Text_Short}}</p>
 	</a>
+</div>
 	
 {% endfor %}
 </aside>
