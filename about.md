@@ -12,25 +12,10 @@ title:     About
     archieml: true,
     cache: false,
     callback: function(d){
-      //  console.log(d.copy);
+        console.log(d.copy.archie);
         view = d.copy.archie;
-        allcontent= '';
-        //concantenate all the content so I don;t have to deal with it on a line by line basis.
-        for (var key in view) {
-		  if (view.hasOwnProperty(key)) {
-		    //console.log(key + " -> " + view[key]);
-		    allcontent += view[key]; 
-		  }
-		}
-		console.log(allcontent);
-
-
-        //console.log(view);
-        //template = $('#template').html();
-        //Mustache.parse(template);   // optional, speeds up future uses
-        //rendered = Mustache.render(template, view);
-
-
+        console.log(d.copy.archie);
+        view.content = d.copy.archie.content.replace(/(\r\n|\n|\r)/gm, "<br />");
         template = $('#template').html();
         Mustache.parse(template);   // optional, speeds up future uses
         rendered = Mustache.render(template, view);
@@ -52,5 +37,9 @@ title:     About
 </dl>
 {% endraw %}
 </script>
-
-<section id="about-copy" class="about"></section>
+<section>
+    <div id="about-copy" class="about"></div>
+    <div class="sidebar">
+        {% include sidebar.html %}
+    </div>
+</section>

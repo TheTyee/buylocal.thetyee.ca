@@ -1,12 +1,18 @@
-<article class="business-card greeting-card holiday-card">
+<article class="business-card">
 
-	<em>{{ contest.Created }}</em>
+	<em class="business-card-date">{{ contest.Created | date: "%B %-d, %Y"}}</em>
+	<div class="business-card-share">
+				   <div class="fb-share-button" 
+        data-href="{{site.url}}{{page.url}}" 
+        data-layout="button">
+    </div>
+
+			<a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square"></i></a>
+				<a class="twitter-share" href="https://twitter.com/share?text={{ page.title }}&URL={{ site.url }}{{ page.url }}&via={{ site.twitter_username }}&hashtags=affordablehousing"><i class="fa fa-twitter-square"></i></a>
+			<a class="email-share" target="_blank" href="mailto:?subject={{ page.title }}&body=I thought you might like this article from thehousingfix.ca. Read it at {{ base.url }}{{ page.url }}."><i class="fa fa-envelope-o"></i></a>
+		</div>
 	<p>Dear {{ contest.Business }}:</p>
-		<div class="business-card-share">
-			<i class="fa fa-facebook-square fa-lg"></i>
-			<i class="fa fa-twitter-square fa-lg"></i>
-			<i class="fa fa-envelope fa-lg"></i>
-	</div>
+		
 	<div class="business-card-details">
 	<p>{{ contest.Details }}</p>
 	</div>

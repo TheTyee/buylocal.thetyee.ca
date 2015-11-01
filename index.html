@@ -9,22 +9,14 @@ layout: default
     archieml: true,
     cache: false,
     callback: function(d){
-      //  console.log(d.copy);
-        view = d.copy;
-        allcontent= '';
-        //concantenate all the content so I don;t have to deal with it on a line by line basis.
-        for (var key in view) {
-		  if (view.hasOwnProperty(key)) {
-		    //console.log(key + " -> " + view[key]);
-		    allcontent += view[key]; 
-		  }
-		}
-		console.log(allcontent);
-        //console.log(view);
-        //template = $('#template').html();
-        //Mustache.parse(template);   // optional, speeds up future uses
-        //rendered = Mustache.render(template, view);
-        $('#about-copy').html(allcontent);
+
+      console.log(d.copy.archie);
+        view = d.copy.archie;
+        view.content = d.copy.archie.content.replace(/(\r\n|\n|\r)/gm, "<br />");
+        template = $('#template').html();
+        Mustache.parse(template);   // optional, speeds up future uses
+        rendered = Mustache.render(template, view);
+        $('#home-copy').html(rendered);
     }
   });
 </script>
@@ -36,14 +28,16 @@ layout: default
 {% raw %}
 <dl>
 
-<h3>{{{hed}}}</h3>
+<h2 class="heading">{{{hed}}}</h2>
 <p>{{{content}}}</p>
 
 </dl>
 {% endraw %}
 </script>
+<section>
+    <div id="home-copy" class="home"></div>
+</section>
 
-<section id="about-copy" class="about"></section>
 <section>
 <div class="button-wrapper">
 Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
@@ -60,5 +54,5 @@ Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
 {% include sidebar.html %}
 </div>
 </section>
-<div class="col-md-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae sem tempor libero elementum placerat. Aenean commodo sapien a lectus iaculis, quis dictum urna interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam lobortis nunc sed cursus euismod. Vestibulum bibendum ullamcorper odio, vel egestas massa. Donec sed lacus mattis enim vestibulum sagittis vitae quis erat. Nulla laoreet fringilla ex. Aenean eget purus non lorem sagittis semper ut vitae nunc. Maecenas feugiat ullamcorper arcu ut maximus. Aliquam vel ipsum ligula. Vestibulum ut nisi porttitor, vestibulum neque vitae, facilisis enim. Proin volutpat nibh ut pellentesque pulvinar. Ut porttitor egestas est hendrerit hendrerit. Aenean at nulla nisi.</div>
+
 
