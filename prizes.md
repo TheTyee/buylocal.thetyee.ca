@@ -4,10 +4,10 @@ layout:    default
 title:     Prizes
 ---
 
-<section>
+<section class="prize-list">
 
 
-<div class="main-content">
+<div class="main short-prize-description">
 <h2 class="heading">Prizes</h2>
 {% for prize in site.data.prizes %}
 	<img src = "{{prize.Image}}" />

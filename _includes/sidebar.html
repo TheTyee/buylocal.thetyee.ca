@@ -1,13 +1,25 @@
 <aside>
-{% for prize in site.data.prizes %}
-<div class="prize">
-	<a href="/prizes/">
-	<img src = "{{prize.Image}}" />
-	<p>{{prize.Businessname}}</p>
-	<p>{{prize.Text_Short}}</p>
-	</a>
-</div>
-	
-{% endfor %}
+	<h3 class="sidebar-header">Contest brought to you by</h3>
+
 </aside>
-<div id="instafeed"></div>
+<aside>
+	<h3 class="sidebar-header">Prizes</h3>
+	{% for prize in site.data.prizes %}
+	{% if prize.Image  %}
+	<div class="prize">
+		<a href="/prizes/">
+		<img src = "{{prize.Image}}" />
+		<br />
+		{{prize.Businessname}}<br/>
+		{{prize.Text_Short}}
+		</a>
+	</div>	
+	{% endif %}
+	{% endfor %}
+	<a>Full prize list</a>
+</aside>
+<aside>
+	<h3 class="sidebar-header">Recent local love on instagram</h3>
+	<div id="instafeed"></div>
+<p>Want to submit your own instagram entry?  Learn how here.</p>
+</aside>

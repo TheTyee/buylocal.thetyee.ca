@@ -22,20 +22,21 @@
             {% for p in site.pages %}
                 {% unless p.url == "/" %}
                     {% unless p.url == "/feed.xml" %}
-                <li><a href="{{p.url}}"> {{ p.title}}</a></li>
-                {% endunless %}
+                        <li><a href="{{p.url}}"> {{ p.title}}</a></li>
+                    {% endunless %}
                 {% endunless %}
             {% endfor %}
+            <li><a href="/">Enter Now</a></li>
         </ul>
     </div>
     </div>
 </div>
 </nav>
+
+</header>
 <div class="elbanner">
     <a href="/">
         <div class="eldeclaration"></div>
     </a>
 </div>
-</header>
-
 
