@@ -1,0 +1,54 @@
+ /* ==========================================================================
+LAYOUT :: GLOBAL
+========================================================================== */ 
+
+header {
+  overflow: hidden!important;
+}
+
+section {
+  &:extend(.container);
+} 
+
+article {
+  &:extend(.row);
+ } 
+
+.main {
+  .make-md-column(8);
+}
+
+.sidebar {
+   .make-md-column(4);
+   aside {  
+    &:extend(.row);
+   }
+}
+
+ /* ==========================================================================
+LAYOUT :: SIDEBAR
+========================================================================== */ 
+
+
+
+
+.prize {
+  .make-md-column(6); 
+}
+
+
+ /* ==========================================================================
+LAYOUT :: BUSINESS CARDS
+========================================================================== */ 
+
+.business-card {
+   .make-md-column(4);
+   max-height: 350px;
+   overflow: scroll;
+   padding: 0em;
+   margin: 0em;
+
+   .inner-business-card {
+      padding: 20px;
+   }
+}
