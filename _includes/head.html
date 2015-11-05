@@ -35,7 +35,16 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <!-- CSS -->
     <!-- jekyll-assets pipeline -->
+    {% stylesheet font-awesome.css %}
     {% stylesheet styles.css %}
+    {% javascript jquery.min.js %}
+    {% javascript jquery.doctop.min.js %}
+    {% javascript archieml.js %}
+    {% javascript mustache.min.js %}
+    {% javascript moment-with-locales.min.js %}
+    {% javascript custom.js %}
+
+    
     <!-- /jekyll-assets pipeline -->
     <!-- /CSS -->
     <!-- JS Head -->

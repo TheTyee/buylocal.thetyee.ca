@@ -1,6 +1,58 @@
 ---
 layout: default
 ---
+<!--DOCTOP-->
+<script>
+  $.doctop({
+    url: 'https://docs.google.com/document/d/16e7-MDmxmEuujZjcx5iCoPzjVMfH3jbTfPaYwpEYaMY/pub',
+    archieml: true,
+    cache: false,
+    callback: function(d){
+        //console.log(d.copy.archie);
+        view = d.copy.archie;
+        //strips the carriage returns for HTML linebreaks
+        view.content = d.copy.archie.content.replace(/(\r\n|\n|\r)/gm, "<br />");
+        template = $('#template').html();
+        Mustache.parse(template);   // optional, speeds up future uses
+        rendered = Mustache.render(template, view);
+        $('#home-copy').html(rendered);
+    }
+  });
+</script>
+<!--MUSTACHE TEMPLATE -->
+<script id="template" type="x-tmpl-mustache">
+    {% raw %}
+        <dl>
+        <p>{{{content}}}</p>
+        <h2 class="heading">{{{hed}}}</h2>
+        </dl>
+    {% endraw %}
+</script>
 
-{% include styleguide_elements.html %}
-{% include styleguide_elements.html %}
+<!--PAGE MARKUP-->
+<section class="intro-content">
+    <article>
+        <div class="main">
+            <div id="home-copy"></div>
+            {% include form.html %}
+        </div>
+        <div class="sidebar">
+            {% include sidebar.html %}
+        </div>
+    </article>
+</section>
+
+
+<section class="business-cards">
+    <h2 class="heading">Recent letters</h2>
+    <div class="button-wrapper">
+    Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
+    </div>
+    <article class="cards">
+        {% for contest in site.data.contests limit:6%}
+        {% include business_card.html%}
+        {% endfor %}
+    </article>
+</section>
+
+
