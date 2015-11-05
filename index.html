@@ -4,7 +4,7 @@ layout: default
 <!--DOCTOP-->
 <script>
   $.doctop({
-    url: 'https://docs.google.com/document/d/16e7-MDmxmEuujZjcx5iCoPzjVMfH3jbTfPaYwpEYaMY/pub',
+    url: 'https://docs.google.com/document/d/1yiePHuLkgI3L1bPpEXlrTNCQnhI9KwyOELKquCn52MI/pub',
     archieml: true,
     cache: false,
     callback: function(d){
@@ -49,9 +49,9 @@ layout: default
     Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
     </div>
     <article class="cards">
-        {% for contest in site.data.contests limit:6%}
-        {% include business_card.html%}
-        {% endfor %}
+    <div id="letters">
+    </div>
+    <div id="letter"></div>
     </article>
 </section>
 
