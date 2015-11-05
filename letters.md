@@ -1,5 +1,6 @@
 ---
-layout: default
+layout:    default
+title:     Readers' Cards
 ---
 
 <div id="letters">
