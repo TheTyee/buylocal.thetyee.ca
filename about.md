@@ -8,7 +8,7 @@ title:     About
 
 <script>
   $.doctop({
-    url: 'https://docs.google.com/document/d/10nWbn3ZCkaVPSaNZw00IRPKVlPHxKhjJGpEmddtYFVo/pub',
+    url: 'https://docs.google.com/document/d/1Azy7Aoi6-899S8SLAnGndM3R2Pt7lnMHdUmNzHcEXhc/pub',
     archieml: true,
     cache: false,
     callback: function(d){
