@@ -38,8 +38,10 @@ title:     About
 {% endraw %}
 </script>
 <section>
+    <article>
     <div id="about-copy" class="main"></div>
     <div class="sidebar">
         {% include sidebar.html %}
     </div>
+</article>
 </section>
