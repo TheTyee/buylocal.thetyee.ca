@@ -3,8 +3,8 @@ version: 0.0.1
 title: "Buy Local"
 description: "Send Holiday Greetings to your favourite local biz. (And win!)"
 baseurl: ""
-url: "http://buylocal.thetyee.ca"
-
+#url: "http://buylocal.thetyee.ca"
+url: "http://localhost:4000"
 # Project settings - Analytics
 analytics:
     ga_tracking_id: 'UA-12345-5'
@@ -63,7 +63,14 @@ assets:
     - bower_components/bootstrap/dist/js/
     - bower_components/underscore/
     - bower_components/backbone/
+    - bower_components/instafeed.js/
     - bower_components/bootstrap/dist/css/
+    - bower_components/fontawesome/css/
+    - bower_components/less/
+    - bower_components/doctop/dist/
+    - bower_components/mustache/
+    - bower_components/archieml-js/
+    - bower_components/moment/min/
   js_compressor: yui
   css_compressor: yui
   cache: true
