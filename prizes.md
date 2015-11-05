@@ -4,22 +4,22 @@ layout:    default
 title:     Prizes
 ---
 
-<section class="prize-list">
+<section>
 
-
-<div class="main short-prize-description">
+<article>
+<div id="prizes" class="main">
 <h2 class="heading">Prizes</h2>
 {% for prize in site.data.prizes %}
+<div class="single-prize">
 	<img src = "{{prize.Image}}" />
-	<p><a href="{{prize.Link}}">{{prize.Businessname}}</a></p>
-	<p>{{prize.Text_Short}}</p>
+	<h3><strong>{{prize.Text_Short}}</strong> from <a href="{{prize.Link}}">{{prize.Businessname}}</a></h3>
 	<p>{{prize.Text_Long}}</p>
-	<p>{{prize.Link}}</p>
-	
+	</div>
 {% endfor %}
 
 </div>
 <div class="sidebar">
 {% include sidebar.html %}
 </div>
+</article>
 </section>
