@@ -134,11 +134,23 @@ h3 {
 HOME
 ========================================================================== */ 
 
-/* VARIABLES */
+/* :: VARIABLES :: */
 
 @ltgrey: #dedede;
 @padding: 20px;
 @corner: 5px;
+
+/* :: MIXINS :: */
+
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius:    @radius;
+  border-radius:         @radius;
+
+  -moz-background-clip:    padding;
+  -webkit-background-clip: padding-box;
+  background-clip:         padding-box;
+}
 
 .cards div li {
   border: solid 1px @ltgrey;
@@ -166,5 +178,6 @@ PAGE :: PRIZES
 
 
 .single-prize {
-  background-color: @ltgrey;
+  border: solid 1px @ltgrey;
+  .border-radius (@radius: 5px)
 }
