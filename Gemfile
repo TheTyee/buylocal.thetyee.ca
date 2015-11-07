@@ -7,3 +7,7 @@ gem 'yui-compressor'
 gem 'jekyll-assets'
 gem 'therubyracer'
 gem 'less'
+
+group :jekyll_plugins do
+  gem 'jekyll-gdrive'
+end
