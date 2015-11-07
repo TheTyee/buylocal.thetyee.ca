@@ -6,9 +6,9 @@
 {% unless page.url == '/prizes/' %}
 <aside>
 
-
-
-      {% for row in site.data.google_sheet %}
+<h3 class="sidebar-header">Prizes</h3>
+<div class="prize">
+      {% for row in site.data.google_sheet offset: 1%}
     	{% assign counter = 0 %}
       	{% for col in row %}
       	{% assign handle = counter %}
@@ -33,7 +33,7 @@
 		     {% when 4 %}
 		  	{% assign image = col %}
 		  		{% assign counter = counter |plus: 1 %}
-		  		  	<a href="{{link}}"><p>{{textshort}}</p> <img src="{{ image }}"/></a>
+		  		  <img src="{{ image }}"/>	<a href="/prizes/"><p>{{textshort}}</p> </a>
 
 		  {% else %}
 	
@@ -46,22 +46,10 @@
 
       	{% endfor %}
       {% endfor %}
+<a>Full prize list</a></div>
 
 
-	<h3 class="sidebar-header">Prizes</h3>
-	{% for prize in site.data.prizes %}
-	{% if prize.Image  %}
-	<div class="prize">
-		<a href="/prizes/">
-		<img src = "{{prize.Image}}" />
-		<br />
-		{{prize.Businessname}}<br/>
-		{{prize.Text_Short}}
-		</a>
-	</div>	
-	{% endif %}
-	{% endfor %}
-	<a>Full prize list</a>
+	
 </aside>
 {% endunless %}
 <aside>
