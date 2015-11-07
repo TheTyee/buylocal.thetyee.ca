@@ -7,46 +7,38 @@
 <aside>
 
 <h3 class="sidebar-header">Prizes</h3>
-<div class="prize">
-      {% for row in site.data.google_sheet offset: 1%}
-    	{% assign counter = 0 %}
-      	{% for col in row %}
-      	{% assign handle = counter %}
 
-      	{% case handle %}
-		  {% when 0 %}
-		   {% assign bizname = col %}
-		   	{% assign counter = counter |plus: 1 %}
-
-
-
-		  {% when 1 %}
-		  {% assign textshort = col %}
-		  	{% assign counter = counter |plus: 1 %}
-		
-		     {% when 2 %}
-		   {% assign textlong = col %}
-		   	{% assign counter = counter |plus: 1 %}
-		  {% when 3 %}
-		   {% assign link = col %}
-		   	{% assign counter = counter |plus: 1 %}
-		     {% when 4 %}
-		  	{% assign image = col %}
-		  		{% assign counter = counter |plus: 1 %}
-		  		  <img src="{{ image }}"/>	<a href="/prizes/"><p>{{textshort}}</p> </a>
-
-		  {% else %}
-	
-		{% endcase %}
-      
-     		
-      					
-      
-    	
-
-      	{% endfor %}
-      {% endfor %}
-<a>Full prize list</a></div>
+	{% for row in site.data.google_sheet offset: 1 limit: 6%}
+		{% assign counter = 0 %}
+		{% for col in row %}
+			{% assign handle = counter %}
+			{% case handle %}
+			{% when 0 %}
+				{% assign bizname = col %}
+				{% assign counter = counter |plus: 1 %}
+			{% when 1 %}
+				{% assign textshort = col %}
+				{% assign counter = counter |plus: 1 %}
+			{% when 2 %}
+				{% assign textlong = col %}
+				{% assign counter = counter |plus: 1 %}
+			{% when 3 %}
+				{% assign link = col %}
+				{% assign counter = counter |plus: 1 %}
+			{% when 4 %}
+				{% assign image = col %}
+				{% assign counter = counter |plus: 1 %}
+				<div class="prize">
+					<img src="{{ image }}"/>	
+					<a href="/prizes/">
+						<p>{{textshort}}</p> 
+					</a>
+				</div>
+			{% else %}
+			{% endcase %}
+		{% endfor %}
+	{% endfor %}
+<a class="button">Full prize list</a>
 
 
 	
@@ -55,5 +47,5 @@
 <aside>
 	<h3 class="sidebar-header">Recent local love on instagram</h3>
 	<div id="instafeed"></div>
-<p>Want to submit your own instagram entry?  Learn how here.</p>
+<p>Want to submit your own instagram entry?  <a class="button">Learn how</a></p>
 </aside>
