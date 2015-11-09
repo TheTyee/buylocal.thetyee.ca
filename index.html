@@ -58,7 +58,19 @@ layout: default
 
 <section>
     <article class="vancity-content">
-    Maecenas justo sodales eu nibh at libero senectus nisl scelerisque a consectetur condimentum suspendisse justo in vestibulum porta a odio natoque et auctor class ut a parturient. Potenti a rutrum diam vestibulum a felis morbi donec suscipit convallis a cubilia etiam sapien in dis. Blandit parturient urna fermentum elit dis parturient volutpat ad vestibulum facilisi a nec iaculis mus vulputate iaculis at parturient ac posuere condimentum. Scelerisque nisi a convallis ullamcorper at iaculis suspendisse velit bibendum consectetur urna parturient ipsum odio curae et tortor ullamcorper feugiat odio sem lorem at a porttitor nam. Proin potenti volutpat tortor augue proin dolor aptent scelerisque ad a ut aliquet volutpat pulvinar.
-</article>
+        <script id="partner_template" type="x-tmpl-mustache">
 
+        {% raw %}
+        <dl>    
+        <img src="{{{Image}}"/>
+        <a href="{{{Link}}}">{{Business}}</a>
+        <a href="http://www.twitter.com/{{{Twitter}}}">{{{Twitter}}}</a>
+        <p>{{{Text}}}</p>
+        <a href="{{{Link}}}">Learn more</a>
+        </dl>
+        {% endraw %}
+        </script>
+        <div id="partners"></div>
+
+    </article>
 </section>
