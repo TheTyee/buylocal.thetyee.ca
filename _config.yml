@@ -79,6 +79,7 @@ assets:
     - bower_components/mustache/
     - bower_components/archieml-js/
     - bower_components/moment/min/
+    - bower_components/tabletop/src/
   js_compressor: yui
   css_compressor: yui
   cache: true

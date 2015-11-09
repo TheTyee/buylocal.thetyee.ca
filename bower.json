@@ -24,6 +24,7 @@
     "fontawesome": "~4.4.0",
     "doctop": "~1.2.1",
     "mustache": "~2.2.0",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "tabletop": "~1.4.2"
   }
 }
