@@ -11,7 +11,7 @@ $(document).ready(function(){
 		console.log(all_partners);
 
 		$.each(all_partners, function(index, value){
-			//console.log(value);
+			console.log(value);
 	
 			var template;
 			var each_rendered;
@@ -22,8 +22,8 @@ $(document).ready(function(){
 			//Mustache.parse(template);   // optional, speeds up future uses
 			each_rendered = Mustache.render(template, view);
 			console.log(template);
-			$('#partners').html(each_rendered);
-		});
+			$('#partners').append(each_rendered);
+			});
 		}
 
 init();
