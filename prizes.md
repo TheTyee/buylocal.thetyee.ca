@@ -32,7 +32,7 @@ title:     Prizes
 		  			{% assign image = col %}
 		  			{% assign counter = counter |plus: 1 %}
 						<div class="single-prize">
-						<img src="{{ image }}"/>	
+						<img src="{{site.url}}/ui/img/{{ image }}"/>	
 						<a href="{{link}}">
 							<h4>{{textshort}}</h4> 
 						</a>

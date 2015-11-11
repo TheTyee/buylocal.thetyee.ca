@@ -1,5 +1,5 @@
 ---
-ts: 1447215324
+ts: 1447219886
 data:
 - - Business_Name
   - Text_Short
@@ -13,7 +13,7 @@ data:
     But of course, being the enlightened person that you are, you'll surely use it
     at locally owned businesses, right?
   - http://www.vancity.com/local
-  - http://thetyee.ca/Presents/2014/11/26/vancity-visa.jpg
+  - vancity-visa.jpg
   - ''
 - - Burnaby Heights
   - $1000 shopping spree
@@ -21,7 +21,7 @@ data:
     Cioffi's Meat Market & Deli, Glenburn Soda Fountain and more in this $1,000 Heights
     Shopping Spree.
   - http://www.burnabyheights.com/
-  - http://thetyee.ca/Presents/2014/11/26/burnaby-heights610px.jpg
+  - burnaby-heights610px.jpg
   - ''
 - - Granville Island
   - $500 shopping spree at Granville Island
@@ -29,7 +29,7 @@ data:
     ready? You could win a $500 shopping spree to spend on unique, artisan-made products
     at Granville Island.
   - http://granvilleisland.com/
-  - ! 'Image folder: granville-island-xmas'
+  - Granville-island-xmas.jpg
   - ''
 - - Local Whistler
   - $1000 Whistler Getaway for Two
@@ -38,7 +38,7 @@ data:
     floats at West Coast Float and a Vibrant Health Retreat certificate for the Green
     Moustache/Richer Health.
   - http://localwhistler.com/
-  - ! 'Image folder: Tyee prize image & Whistler mountain - snow'
+  - Whistlermountain-snow.jpg
   - ''
 - - Viva Organic Skin Care
   - Holiday Gift Box
@@ -46,14 +46,14 @@ data:
     Gel (60mL), Pure Hyaluronic Acid Serum (15mL) and Amaze Cream (60mL) and is valued
     at $139.99.
   - http://vivahealthskincare.com/
-  - ! 'Image folder: Gift box with Amaze Cream & logo green'
+  - Gift-Box-with-Amaze-Cream.jpg
   - ''
 - - Tofino Chamber of Commerce
   - Tofino Getaway
   - Enjoy two nights (for two) on the wild west coast of Vancouver Island, courtesy
     of Tofino-Long Beach Chamber of Commerce and Middle Beach Resort. ($260 value.)
   - http://www.middlebeach.com/
-  - http://thetyee.ca/Presents/2014/11/26/tofino610px.jpg
+  - tofino610px.jpg
   - ''
 - - Red Cat Records
   - $300 Red Cat Records Vinyl Prize
@@ -61,7 +61,7 @@ data:
     a new audio-technica turntable, a $100 gift certificate, Red Cat T-shirt and tote,
     and carbon fibre brush.'
   - http://www.redcat.ca/
-  - http://thetyee.ca/Presents/2014/11/26/red-cat-prize610px.jpg
+  - red-cat-prize610px.jpg
   - ''
 - - Lonsdale Quay
   - $100 Market Gift Basket
