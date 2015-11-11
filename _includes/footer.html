@@ -1,43 +1,7 @@
 <footer class="about-sponsors">
 	<div class="container">
 		<h1>Contest Partners</h1>
-		<script>
-  $.doctop({
-    url: 'https://docs.google.com/document/d/1QLStRd3RgwB05IYRB61ZTJEJsOyh_6RS25fqhv26AuU/pub',
-    archieml: true,
-    cache: false,
-    callback: function(footer){
-        view = footer.copy.archie;
-        console.log(footer.copy.archie);
-        view.content = footer.copy.archie.content.replace(/(\r\n|\n|\r)/gm, "<br />");
-        template = $('#footer_template').html();
-       // Mustache.parse(template);   // optional, speeds up future uses
-        rendered = Mustache.render(template, view);
-        $('#footer').html(rendered);
-    }
-  });
-</script>
 
-		 <script id="footer_template" type="x-tmpl-mustache">
-
-        {% raw %}
-     
-        <dl>    
-
-        <div class="contest-partner">
-	        <h2 class="partner-heading">{{{Name}}}</h2>
-	        
-	        <p>{{{Content}}}</p>
-        </div>
-        </dl>
-    
-        {% endraw %}
-        </script>
-        <div id="footer"></div>
-
-
-
-		<!--
 		<div class="contest-partner">
 			<h2 class="partner-heading">LOCO</h2>
 			<p>LOCO works to strengthen our communities, build the local economy and build strong, sustainable businesses by increasing local spending by consumers, businesses and institutions/government. </p>
@@ -54,7 +18,7 @@
 
 			<div class="contest-partner">
 				<h2 class="partner-heading">Vancity</h2><p>Vancity is a values-based financial co-operative serving the needs of over 492,000 member-owners and their communities through 57 branches in Metro Vancouver, the Fraser Valley, Victoria and Squamish.</p><p>As Canada’s largest community credit union, Vancity uses up to $17.1 billion in assets to help improve the financial wellbeing of its members while at the same time helping to develop healthy, sustainable communities. Member deposits enable us to loan to other members, businesses and organizations that are creating positive economic, social and environmental impact in their communities.</p><p>We’re proud to be a Living Wage employer and a member of the Global Alliance for Banking on Values.</p><a href="https://vancity.com"><img src="{{site.url}}/ui/img/vancity.png"></a></div>
--->
+
 
 				</div>
 
