@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+	//Initialize partner ads through tabletop
+  	
   	var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1bpwVmVv4J7ZpXi0BZeG8sH93jhHFD6CCTxtzmin3SeA/pubhtml';
 	  function init() {
 	    var tabletop = Tabletop.init( { key: public_spreadsheet_url, callback: showInfo } )
@@ -10,39 +13,42 @@ $(document).ready(function(){
 		total_partners = all_partners.length;
 
 		randomizer = Math.floor((Math.random() * total_partners) + 1);
+		var template;
+		var each_rendered;
+		var view;
+		view = all_partners[randomizer];
+		template = $('#partner_template').html();
+		each_rendered = Mustache.render(template, view);
+		//console.log(template);
+		$('#partners').html(each_rendered);
+	}
 
+	init();
 
+	//Initialize footer content through tabletop
 
-			var template;
-			var each_rendered;
-			var view;
-	
-			//Math.floor((Math.random() * 10) + 1);
-			view = all_partners[randomizer];
-			template = $('#partner_template').html();
-			//Mustache.parse(template);   // optional, speeds up future uses
-			each_rendered = Mustache.render(template, view);
-			console.log(template);
-			$('#partners').html(each_rendered);
+	var footer_content = 'https://docs.google.com/spreadsheets/d/1OHdC2tYZz--Q3ksP2qk8AzBd8jSNp8qSElsBB3sCsGY/pubhtml';
 
-/*
-		$.each(all_partners, function(index, value){
-			//console.log(value);
-	
-			var template;
-			var each_rendered;
-			var view;
-	
-			//Math.floor((Math.random() * 10) + 1);
-			view = value;
-			template = $('#partner_template').html();
-			//Mustache.parse(template);   // optional, speeds up future uses
-			each_rendered = Mustache.render(template, view);
-			console.log(template);
-			$('#partners').html(each_rendered);
-			});*/
-		}
+	 function footer_init() {
+	    var tabletop = Tabletop.init( { key: footer_content, callback: footer_showInfo } )
+	  }
 
-init();
+	  function footer_showInfo(data, tabletop) {
+	  	
+	  		all_partners = data.Sheet1.elements;
+
+	  		$.each(all_partners, function(key, value){
+				var template;
+				var each_rendered;
+				var view;
+				view = value;
+				template = $('#footer_template').html();
+				each_rendered = Mustache.render(template, view);
+				//console.log(template);
+				$('#footer').append(each_rendered);
+			});
+	}
+
+	footer_init();
 
 });
