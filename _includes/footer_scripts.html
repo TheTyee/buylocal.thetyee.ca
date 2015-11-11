@@ -2,14 +2,20 @@
 {% javascript app.js %}
 
 
-
 <script type="text/javascript">
     var userFeed = new Instafeed({
-        get: 'user',
+        get: 'tagged',
+        tagName: 'BCBuyLocal',
         userId: parseInt(417159344),
         accessToken: '333678892.9897311.ce85a47091c34fd1af4ac9c1d6fb8e19',
         sortBy: 'random',
-        limit: 2
+        limit: 4,
+        error: function(data){
+          $('.instagram-widget').hide();
+        },
+        success: function(data){
+          
+        }
     });
     userFeed.run();
 </script>
