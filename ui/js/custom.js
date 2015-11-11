@@ -9,7 +9,7 @@ $(document).ready(function(){
 	  	all_partners = data.Sheet1.elements;
 		total_partners = all_partners.length;
 
-		randomizer = Math.floor((Math.random() * 10) + 1);
+		randomizer = Math.floor((Math.random() * total_partners) + 1);
 
 
 
