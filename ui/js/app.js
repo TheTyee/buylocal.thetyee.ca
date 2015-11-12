@@ -34,7 +34,7 @@ App.CardView = Backbone.View.extend({
     initialize: function () {
 
     },
-    template: _.template("<li data-card='<%= EntryId %>' class='card'><%= DateCreated %><br />Social Sharing<br />Permalink<br />Dear <%= Field652 %><br /><%= Field655 %></li>"),
+    template: _.template("<li data-card='<%= EntryId %>' class='card'><%= DateCreated %><br /><a href='https://twitter.com/share?url=http://localhost:4000/letters/show/<%= EntryId %>&text=Thank you, <%= Field652 %>!&via=TheTyee&hashtags=bcbuylocal' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a><a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= Field652 %>&description=test&link=http://localhost:4000/letters/show/<%= EntryId %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a><a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at http://localhost:4000/letters/show/<%= EntryId %>'><i class='fa fa-envelope fa-2x'></i></a><br /><a href='/letters/#show/<%= EntryId %>'>Permalink</a><br />Dear <%= Field652 %><br /><%= Field655 %></li>"),
     render: function() {
         this.$el.html(this.template(this.model.attributes));
         return this;
@@ -50,7 +50,7 @@ App.CardDetailView = Backbone.View.extend({
     initialize: function () {
 
     },
-    template: _.template("<div data-card='<%= EntryId %>' class='card-detail'><%= DateCreated %><br />Social Sharing<br />Permalink<br />Dear <%= Field652 %>:<br /> <%= Field655 %></div><br /><a class='show-list' href='#'>Back</a>"),
+    template: _.template("<div data-card='<%= EntryId %>' class='card-detail'><%= DateCreated %><br /><a href='https://twitter.com/share?url=http://localhost:4000/letters/show/<%= EntryId %>&text=Thank you, <%= Field652 %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a><a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= Field652 %>&description=test&link=http://localhost:4000/letters/show/<%= EntryId %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a><a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at http://localhost:4000/letters/show/<%= EntryId %>'><i class='fa fa-envelope fa-2x'></i></a><br /><a href='/letters/#show/<%= EntryId %>'>Permalink</a><br />Dear <%= Field652 %>:<br /> <%= Field655 %></div><br /><a class='show-list' href='#'>Back</a>"),
     render: function() {
         this.$el.show();
         this.$el.html(this.template(this.model.attributes));
