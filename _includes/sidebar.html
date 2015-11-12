@@ -29,7 +29,7 @@
 				{% assign image = col %}
 				{% assign counter = counter |plus: 1 %}
 				<div class="prize">
-					<img src="{{ image }}"/>	
+					<img src="{{site.url}}/ui/img/{{ image }}"/>	
 					<a href="/prizes/">
 						<p>{{textshort}}</p> 
 					</a>
@@ -44,7 +44,7 @@
 	
 </aside>
 {% endunless %}
-<aside>
+<aside class="instagram-widget">
 	<h3 class="sidebar-header">Recent local love on instagram</h3>
 	<div id="instafeed"></div>
 <p>Want to submit your own instagram entry?  <a class="button">Learn how</a></p>
