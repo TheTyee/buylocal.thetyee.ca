@@ -32,7 +32,13 @@ title:     Prizes
 		  			{% assign image = col %}
 		  			{% assign counter = counter |plus: 1 %}
 						<div class="single-prize">
-						<img src="{{site.url}}/ui/img/{{ image }}"/>	
+						{% if image == '' %}
+							<img src="{{site.url}}/ui/img/image-soon.png"/>
+						{% else %}
+							<img src="{{site.url}}/ui/img/{{ image }}"/>	
+						{% endif %}
+						
+						
 						<a href="{{link}}">
 							<h4>{{textshort}}</h4> 
 						</a>
