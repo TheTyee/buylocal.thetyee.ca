@@ -5,6 +5,7 @@
 //= require bootstrap.js
 //= require underscore.js
 //= require backbone.js
+//= require backbone.paginator.js
 
 App.Card = Backbone.Model.extend({
     defaults: {
