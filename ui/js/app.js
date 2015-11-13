@@ -63,7 +63,7 @@ App.CardDetailView = Backbone.View.extend({
     initialize: function () {
 
     },
-    template: _.template("<div data-card='<%= id %>' class='card-detail'><%= dateCreated %><br /><a href='https://twitter.com/share?url=http://localhost:4000/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a><a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= businessName %>&description=test&link=http://localhost:4000/letters/show/<%= id %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a><a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at http://localhost:4000/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a><br /><a href='/letters/#show/<%= id %>'>Permalink</a><br />Dear <%= businessName %>:<br /> ...</div><br /><a class='show-list' href='#'>Back</a>"),
+    template: _.template( $('#tpl_cardDetailView').html() ),
     render: function() {
         this.$el.show();
         this.$el.html(this.template(this.model.attributes));
