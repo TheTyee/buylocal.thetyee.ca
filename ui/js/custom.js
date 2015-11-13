@@ -51,4 +51,9 @@ $(document).ready(function(){
 
 	footer_init();
 
+	var rawDate = '2013-11-18 10:57:51';
+	var trimmedDate = rawDate.split(" ")[0];
+	//alert(testTime);
+	var cleanedDate = moment(trimmedDate, 'YYYY-MM-DD').format('MMMM DD, YYYY');
+	console.log(cleanedDate);
 });

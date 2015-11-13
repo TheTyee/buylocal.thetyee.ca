@@ -30,7 +30,7 @@
 				{% assign counter = counter |plus: 1 %}
 				<div class="prize">
 					<img src="{{site.url}}/ui/img/{{ image }}"/>	
-					<a href="/prizes/">
+					<a href="{{site.url}}/prizes/">
 						<p>{{textshort}}</p> 
 					</a>
 				</div>
@@ -38,7 +38,7 @@
 			{% endcase %}
 		{% endfor %}
 	{% endfor %}
-<a class="button">Full prize list</a>
+<a class="button" href="{{site.url}}/prizes/">Full prize list</a>
 
 
 	
@@ -47,5 +47,5 @@
 <aside class="instagram-widget">
 	<h3 class="sidebar-header">Recent local love on instagram</h3>
 	<div id="instafeed"></div>
-<p>Want to submit your own instagram entry?</p>  <a class="button">Learn how</a>
+<p>Want to submit your own instagram entry?</p>  <a href="{{site.url}}/about/" class="button">Learn how</a>
 </aside>
