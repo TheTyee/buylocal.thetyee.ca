@@ -41,7 +41,7 @@ App.Cards = Backbone.PageableCollection.extend({
     model: App.Card,
     url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
-      return response.data.letters;  
+      return response.data.letters;
     },
     initialize: function() {
     },
@@ -117,16 +117,20 @@ App.CardsListView = Backbone.View.extend({
     collection: App.cards,
     el: '#letters',
     events: {
-        "click .card": "showCard"
+        "click .card": "showCard",
+        "click li.next": function() { App.cards.getNextPage(); },
+        "click li.previous": function() { App.cards.getPreviousPage(); },
+        "click li.first": function() { App.cards.getFirstPage(); },
+        "click li.last": function() { App.cards.getLastPage(); }
     },
     initialize: function () {
         this.listenTo(this.collection, 'update reset', this.render);
     },
-    template: _.template("<ul class='letters'></ul>"),
+    template: _.template( $('#tpl_cardListView').html() ),
     render: function () {
         this.$el.show();
         this.el.innerHTML = this.template();
-        var ul = this.$el.find("ul");
+        var ul = this.$el.find("ul.letters");
         this.collection.forEach(function (card) {
             ul.append(new App.CardView({
                 model: card
@@ -186,14 +190,15 @@ App.router = Backbone.Router.extend({
 });
 
 $(function(){
-    App.cards.fetch({ 
-        "success": function(collection, response, options){ 
+    App.cards.fetch({
+        "success": function(collection, response, options){
             App.router = new App.router();
             Backbone.history.start();
-        }, 
+        },
         "error": function(error) {
             // Oh noes!
 
-        } 
+        }
     });
 });
+
