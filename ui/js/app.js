@@ -6,8 +6,6 @@
 //= require underscore.js
 //= require backbone.js
 
-window.App = {};
-
 App.Card = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -28,14 +26,14 @@ App.Card = Backbone.Model.extend({
             "loveMessage": ""
         };
     },
-    urlRoot: '/api/v1/letters',
+    urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
     }
 });
 
 App.Cards = Backbone.Collection.extend({
     model: App.Card,
-    url: '/api/v1/letters',
+    url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
       return response.data.letters;  
     },
