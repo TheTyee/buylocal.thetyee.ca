@@ -152,12 +152,6 @@ HOME
   background-clip:         padding-box;
 }
 
-.cards div li {
-  border: solid 1px @ltgrey;
-  border-radius: @corner;
-  background: rgba(222, 222, 222, 0.1);
-}
-
 .button{
   border-radius: 5px;
   background: #92159e;
@@ -209,5 +203,46 @@ PAGE :: PRIZES
     text-align: center;
     font-weight: 800;
     text-transform: capitalize;
+  }
+}
+
+
+/* ==========================================================================
+LETTERS
+========================================================================== */ 
+
+
+.card, .card-detail {
+  border: solid 1px @ltgrey;
+  border-radius: @corner;
+  background: rgba(222, 222, 222, 0.1);
+}
+
+#letter, .letters {
+  article {
+
+    header {
+      text-align: center;
+
+    }
+    .businessName {
+      font-weight: bold;
+      font-size: 1.2em;
+      text-transform: capitalize;
+    }
+
+    .submitterName{
+      text-transform: capitalize;
+    }
+    footer {
+      text-align: center;
+    }
+  }
+}
+
+#pagination {
+  li{
+    &:extend(.button); 
+
   }
 }

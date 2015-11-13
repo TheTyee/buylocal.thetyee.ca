@@ -51,4 +51,8 @@ $(document).ready(function(){
 
 	footer_init();
 
+
+	//$(".letters > div:nth-child(9)").css('background', 'green');
+	//$('.dateCreated').css('background', 'blue');
+	
 });

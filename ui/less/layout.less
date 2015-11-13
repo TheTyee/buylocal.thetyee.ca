@@ -49,16 +49,39 @@ LAYOUT :: BUSINESS CARDS
    .make-md-column(4);
 
 
-   li {
+   article {
       padding: 10px!important;
       margin: 10px!important;
       max-height: 350px;
+      min-height: 350px;
       overflow: scroll;
       padding: 0em;
       margin: 0em;
+      header {
+        padding-bottom: 10px;
+          i {
+           padding: 0px 10px;
+          }
+      }
    }
 }
 
+
+#letter {
+  article {
+    .make-md-column(8);
+    float: none!important;
+    margin: 0 auto;
+    header {
+      padding: 10px 0px;
+    }
+  }
+}
+#pagination {
+  li {
+    .make-md-column(3);
+  } 
+}
  /* ==========================================================================
 LAYOUT :: PAGE :: PRIZES
 ========================================================================== */ 

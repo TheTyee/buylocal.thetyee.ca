@@ -12,7 +12,8 @@ App.Card = Backbone.Model.extend({
         "businessName": "",
         "businessLocation": "",
         "businessUrl": "",
-        "loveMessage": ""
+        "loveMessage": "",
+        "submitterName": ""
     },
     parse: function(response, options) {
         // TODO response parsing is kinda' borked
@@ -29,7 +30,8 @@ App.Card = Backbone.Model.extend({
             "businessLocation": d.business_city,
             "businessUrl": d.business_url,
             "dateCreated": d.date_created,
-            "loveMessage": d.letter_text
+            "loveMessage": d.letter_text,
+            "submitterName": d.first_name
         };
     },
     urlRoot: App.apiUrl + '/api/v1/letters',

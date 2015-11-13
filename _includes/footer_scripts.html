@@ -1,4 +1,4 @@
-<!--{% javascript instafeed.min.js %}-->
+{% javascript instafeed.min.js %}
 <script>
 window.App = {};
 App.apiUrl = '{{ site.api_url }}';
@@ -6,23 +6,23 @@ App.apiUrl = '{{ site.api_url }}';
 {% javascript app.js %}
 
 
-<!--<script type="text/javascript">-->
-    <!--var userFeed = new Instafeed({-->
-        <!--get: 'tagged',-->
-        <!--tagName: 'BCBuyLocal',-->
-        <!--userId: parseInt(417159344),-->
-        <!--accessToken: '333678892.9897311.ce85a47091c34fd1af4ac9c1d6fb8e19',-->
-        <!--sortBy: 'random',-->
-        <!--limit: 4,-->
-        <!--error: function(data){-->
-          <!--$('.instagram-widget').hide();-->
-        <!--},-->
-        <!--success: function(data){-->
-          
-        <!--}-->
-    <!--});-->
-    <!--userFeed.run();-->
-<!--</script>-->
+<script type="text/javascript">
+    var userFeed = new Instafeed({
+        get: 'tagged',
+        tagName: 'BCBuyLocal',
+        userId: parseInt(417159344),
+        accessToken: '333678892.9897311.ce85a47091c34fd1af4ac9c1d6fb8e19',
+        sortBy: 'random',
+        limit: 4,
+        error: function(data){
+          $('.instagram-widget').hide();
+        },
+        success: function(data){
+         
+        }
+   });
+   userFeed.run();
+</script>
 
 {% if site.mode == 'development-w-grunt' %}
     <script src="//localhost:35729/livereload.js"></script>
