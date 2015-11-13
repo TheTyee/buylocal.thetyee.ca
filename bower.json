@@ -25,6 +25,7 @@
     "doctop": "~1.2.1",
     "mustache": "~2.2.0",
     "moment": "~2.10.6",
-    "tabletop": "~1.4.2"
+    "tabletop": "~1.4.2",
+    "backbone.paginator": "~2.0.2"
   }
 }
