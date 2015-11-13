@@ -28,7 +28,7 @@ App.Card = Backbone.Model.extend({
             "businessLocation": d.business_city,
             "businessUrl": d.business_url,
             "dateCreated": d.date_created,
-            "loveMessage": ""
+            "loveMessage": d.letter_text
         };
     },
     urlRoot: App.apiUrl + '/api/v1/letters',
