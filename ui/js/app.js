@@ -124,23 +124,40 @@ App.router = Backbone.Router.extend({
         }
     },
     letterShow: function(id) {
-        console.log('Card detail route');
-        var card = App.cards.findWhere({"EntryId": id});
+        var card = App.cards.get(id);
+        // TODO Fix this silliness
+        // If the card is accessed directly
+        // it's probably not in the initial collection
+        if (_.isUndefined(card) ) {
+            // Thus it needs to be fetched from the server
+            card = new App.Card({ "id": id });
+            // Which is async, thus we need to render after we have the data
+            card.fetch({
+                "success": function() {
+                    App.cardDetailView = new App.CardDetailView({ model: card });
+                    App.cardDetailView.render();
+                }
+            });
+        } else { // The card *is* in the collection, so just render the view
+            App.cardDetailView = new App.CardDetailView({ model: card });
+            App.cardDetailView.render();
+        }
         if ( App.cardsListView ) {
             // Hide the list?
             App.cardsListView.hide();
         }
-        App.cardDetailView = new App.CardDetailView({ model: card });
-        App.cardDetailView.render();
     }
 });
 
 $(function(){
-    $.getJSON('/data/entries.json', function(d) {
-        _.each(d.Entries, function(entry) {
-            App.cards.add(entry);
-        });
-        App.router = new App.router();
-        Backbone.history.start();
+    App.cards.fetch({ 
+        "success": function(collection, response, options){ 
+            App.router = new App.router();
+            Backbone.history.start();
+        }, 
+        "error": function(error) {
+            // Oh noes!
+
+        } 
     });
 });
