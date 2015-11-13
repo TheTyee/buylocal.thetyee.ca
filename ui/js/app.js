@@ -37,14 +37,40 @@ App.Card = Backbone.Model.extend({
     }
 });
 
-App.Cards = Backbone.Collection.extend({
+App.Cards = Backbone.PageableCollection.extend({
     model: App.Card,
     url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
       return response.data.letters;  
     },
     initialize: function() {
-    }
+    },
+    // Any `state` or `queryParam` you override in a subclass will be merged with
+  // the defaults in `Backbone.PageableCollection` 's prototype.
+  state: {
+
+    // You can use 0-based or 1-based indices, the default is 1-based.
+    // You can set to 0-based by setting ``firstPage`` to 0.
+    firstPage: 1,
+
+    // Set this to the initial page index if different from `firstPage`. Can
+    // also be 0-based or 1-based.
+    currentPage: 1,
+
+    // Required under server-mode
+    totalRecords: 200,
+    pageSize: 20
+  },
+
+  // You can configure the mapping from a `Backbone.PageableCollection#state`
+  // key to the query string parameters accepted by your server API.
+  queryParams: {
+
+    // `Backbone.PageableCollection#queryParams` converts to ruby's
+    // will_paginate keys by default.
+    currentPage: "page",
+    pageSize: "limit"
+  }
 });
 
 App.cards = new App.Cards();
@@ -94,7 +120,7 @@ App.CardsListView = Backbone.View.extend({
         "click .card": "showCard"
     },
     initialize: function () {
-
+        this.listenTo(this.collection, 'update reset', this.render);
     },
     template: _.template("<ul class='letters'></ul>"),
     render: function () {
