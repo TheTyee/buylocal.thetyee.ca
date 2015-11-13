@@ -14,9 +14,14 @@ App.Card = Backbone.Model.extend({
         "loveMessage": ""
     },
     parse: function(response, options) {
-        //var d = response.data.letters;
-        var d = response;
-
+        // TODO response parsing is kinda' borked
+        // and it would be good to fix it.
+        var d;
+        if (        _.isUndefined(response.data) ) {
+            d = response;
+        } else {
+            d = response.data.letters;
+        }
         return {
             "id": d.entry_id,
             "businessName": d.business_name,
