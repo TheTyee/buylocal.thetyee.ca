@@ -9,3 +9,23 @@ title:     Readers' Cards
 		<div id="letter"></div>
 	</article>
 </section>
+<script type="text/template" id="tpl_cardView">
+    <li data-card='<%= id %>' class='card'><%= dateCreated %>
+    <br />
+    <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+    <a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= businessName %>&description=test&link={{ site.url }}/letters/show/<%= id %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>
+    <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+    <br /><a href='/letters/#show/<%= id %>'>Permalink</a>
+    <br />Dear <%= businessName %>
+    <br />...</li>
+</script>>
+<script type="text/template" id="tpl_cardDetailView">
+    <div data-card='<%= id %>' class='card-detail'><%= dateCreated %>
+    <br />
+    <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+    <a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= businessName %>&description=test&link={{ site.url }}/letters/show/<%= id %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>
+    <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+    <br /><a href='/letters/#show/<%= id %>'>Permalink</a>
+    <br />Dear <%= businessName %>:<br /> ...</div>
+    <br /><a class='show-list' href='#'>Back</a>
+</script>>

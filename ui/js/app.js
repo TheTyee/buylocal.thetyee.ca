@@ -6,8 +6,6 @@
 //= require underscore.js
 //= require backbone.js
 
-window.App = {};
-
 App.Card = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -15,12 +13,35 @@ App.Card = Backbone.Model.extend({
         "businessUrl": "",
         "loveMessage": ""
     },
+    parse: function(response, options) {
+        // TODO response parsing is kinda' borked
+        // and it would be good to fix it.
+        var d;
+        if (        _.isUndefined(response.data) ) {
+            d = response;
+        } else {
+            d = response.data.letters;
+        }
+        return {
+            "id": d.entry_id,
+            "businessName": d.business_name,
+            "businessLocation": d.business_city,
+            "businessUrl": d.business_url,
+            "dateCreated": d.date_created,
+            "loveMessage": ""
+        };
+    },
+    urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
     }
 });
 
 App.Cards = Backbone.Collection.extend({
     model: App.Card,
+    url: App.apiUrl + '/api/v1/letters',
+    parse: function(response, options) {
+      return response.data.letters;  
+    },
     initialize: function() {
     }
 });
@@ -34,7 +55,7 @@ App.CardView = Backbone.View.extend({
     initialize: function () {
 
     },
-    template: _.template("<li data-card='<%= EntryId %>' class='card'><%= DateCreated %><br /><a href='https://twitter.com/share?url=http://localhost:4000/letters/show/<%= EntryId %>&text=Thank you, <%= Field652 %>!&via=TheTyee&hashtags=bcbuylocal' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a><a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= Field652 %>&description=test&link=http://localhost:4000/letters/show/<%= EntryId %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a><a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at http://localhost:4000/letters/show/<%= EntryId %>'><i class='fa fa-envelope fa-2x'></i></a><br /><a href='/letters/#show/<%= EntryId %>'>Permalink</a><br />Dear <%= Field652 %><br /><%= Field655 %></li>"),
+    template: _.template( $('#tpl_cardView').html() ),
     render: function() {
         this.$el.html(this.template(this.model.attributes));
         return this;
@@ -44,13 +65,13 @@ App.CardView = Backbone.View.extend({
 App.CardDetailView = Backbone.View.extend({
     el: '#letter',
     events: {
-       "click .show-list": "showList"
+        "click .show-list": "showList"
     },
 
     initialize: function () {
 
     },
-    template: _.template("<div data-card='<%= EntryId %>' class='card-detail'><%= DateCreated %><br /><a href='https://twitter.com/share?url=http://localhost:4000/letters/show/<%= EntryId %>&text=Thank you, <%= Field652 %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a><a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= Field652 %>&description=test&link=http://localhost:4000/letters/show/<%= EntryId %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a><a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at http://localhost:4000/letters/show/<%= EntryId %>'><i class='fa fa-envelope fa-2x'></i></a><br /><a href='/letters/#show/<%= EntryId %>'>Permalink</a><br />Dear <%= Field652 %>:<br /> <%= Field655 %></div><br /><a class='show-list' href='#'>Back</a>"),
+    template: _.template( $('#tpl_cardDetailView').html() ),
     render: function() {
         this.$el.show();
         this.$el.html(this.template(this.model.attributes));
@@ -111,23 +132,40 @@ App.router = Backbone.Router.extend({
         }
     },
     letterShow: function(id) {
-        console.log('Card detail route');
-        var card = App.cards.findWhere({"EntryId": id});
+        var card = App.cards.get(id);
+        // TODO Fix this silliness
+        // If the card is accessed directly
+        // it's probably not in the initial collection
+        if (_.isUndefined(card) ) {
+            // Thus it needs to be fetched from the server
+            card = new App.Card({ "id": id });
+            // Which is async, thus we need to render after we have the data
+            card.fetch({
+                "success": function() {
+                    App.cardDetailView = new App.CardDetailView({ model: card });
+                    App.cardDetailView.render();
+                }
+            });
+        } else { // The card *is* in the collection, so just render the view
+            App.cardDetailView = new App.CardDetailView({ model: card });
+            App.cardDetailView.render();
+        }
         if ( App.cardsListView ) {
             // Hide the list?
             App.cardsListView.hide();
         }
-        App.cardDetailView = new App.CardDetailView({ model: card });
-        App.cardDetailView.render();
     }
 });
 
 $(function(){
-    $.getJSON('/data/entries.json', function(d) {
-        _.each(d.Entries, function(entry) {
-            App.cards.add(entry);
-        });
-        App.router = new App.router();
-        Backbone.history.start();
+    App.cards.fetch({ 
+        "success": function(collection, response, options){ 
+            App.router = new App.router();
+            Backbone.history.start();
+        }, 
+        "error": function(error) {
+            // Oh noes!
+
+        } 
     });
 });
