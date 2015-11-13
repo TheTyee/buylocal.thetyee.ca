@@ -132,6 +132,7 @@ App.router = Backbone.Router.extend({
         }
     },
     letterShow: function(id) {
+        console.log('Card detail');
         var card = App.cards.get(id);
         // TODO Fix this silliness
         // If the card is accessed directly
