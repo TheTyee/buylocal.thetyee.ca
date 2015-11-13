@@ -34,7 +34,7 @@ Submission data, stored in Wufoo, will be accessible to the JavaScript app via a
 Next action:
 - [X] Sally will develop a quick MVP that queries Wufoo directly, and report back on speeed, paging, filtering, etc.
 - [X] Phillip will bootstrap the Backbone app connected to the micro service
-- [ ] Phillip will deploy a micro service that provides access to stored Wufoo entries, with filters and pagination (working on this)
+- [X] Phillip will deploy a micro service that provides access to stored Wufoo entries, with filters and pagination (working on this)
 
 #### Experiment: Content pulled in via DocTop & TableTop
 
