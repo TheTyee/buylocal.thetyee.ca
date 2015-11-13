@@ -196,6 +196,7 @@ $(function(){
         "success": function(collection, response, options){
             App.router = new App.router();
             Backbone.history.start();
+                $('<article class="vancity-content"></article>').insertAfter('.letters >div:nth-child(6n-6)');
         },
         "error": function(error) {
             // Oh noes!
