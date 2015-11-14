@@ -42,3 +42,5 @@ For the moment, there is a Google Drive folder called "Tyee - Contests - Buy Loc
 
 This is where the business team will be working on the contest's content. It's possible that we can bypass the step of "loading" this content into Jekyll using [Tabletop.js](https://github.com/jsoma/tabletop) and [Doctop.js](https://github.com/times/doctop) or simillar libraries that read from Drive (either on the client, or when the site is generated) -- so we should give that a try if there's enough time.
 
+
+
