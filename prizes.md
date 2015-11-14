@@ -33,9 +33,9 @@ title:     Prizes
 		  			{% assign counter = counter |plus: 1 %}
 						<div class="single-prize">
 						{% if image == '' %}
-							<img src="{{site.url}}/ui/img/image-soon.png"/>
+							<img src="/ui/img/image-soon.png"/>
 						{% else %}
-							<img src="{{site.url}}/ui/img/{{ image }}"/>	
+							<img src="/ui/img/{{ image }}"/>	
 						{% endif %}
 						
 						
