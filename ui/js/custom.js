@@ -3,25 +3,40 @@ $(document).ready(function(){
 	//Initialize partner ads through tabletop
   	
   	var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1bpwVmVv4J7ZpXi0BZeG8sH93jhHFD6CCTxtzmin3SeA/pubhtml';
-	  function init() {
-	    var tabletop = Tabletop.init( { key: public_spreadsheet_url, callback: showInfo } )
-	  }
-
-	  function showInfo(data, tabletop) {
-	  	
-	  	all_partners = data.Sheet1.elements;
-		total_partners = all_partners.length;
-
-		randomizer = Math.floor((Math.random() * total_partners) + 1);
-		var template;
-		var each_rendered;
-		var view;
-		view = all_partners[randomizer];
-		template = $('#partner_template').html();
-		each_rendered = Mustache.render(template, view);
-		//console.log(template);
-		$('#partners').html(each_rendered);
+	function init() {
+		var tabletop = Tabletop.init( { key: public_spreadsheet_url, callback: showInfo } )
 	}
+
+	function showInfo(data, tabletop) {
+		all_partners = data.Sheet1.elements;
+		total_partners = all_partners.length;
+	//Create an array of 3 unmatching numbers that i can retrieve from the spreadsheet onpage load
+
+		for (var a=[],i=0;i<total_partners;++i) a[i]=i;	
+			function shuffle(array) {
+			  var tmp, current, top = array.length;
+			  if(top) while(--top) {
+			    current = Math.floor(Math.random() * (top + 1));
+			    tmp = array[current];
+			    array[current] = array[top];
+			    array[top] = tmp;
+			  }
+			  return array;
+		}
+		a = shuffle(a);
+		//limit it to 3, since that's all we'll show
+		randomizer = a.slice(0,3);
+
+		$.each(randomizer, function(key, value){
+			var template;
+			var each_rendered;
+			var view;
+			view = all_partners[value];
+			template = $('#partner_template').html();
+			each_rendered = Mustache.render(template, view);
+				$('.partner-'+key).html(each_rendered);
+			});
+		}
 
 	init();
 
