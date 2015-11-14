@@ -47,3 +47,4 @@ This is where the business team will be working on the contest's content. It's p
 - Hook test #3
 - Hook test #4
 - Hook test #5
+- Hook test #6
