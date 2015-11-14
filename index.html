@@ -43,26 +43,76 @@ layout: default
 </section>
 
 
+
+
 <section class="business-cards">
     <h2 class="heading">Recent letters</h2>
-    <div class="button-wrapper">
-    Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
-    </div>
     <article class="cards">
-    <div id="letters">
-    </div>
-    <div id="letter"></div>
+        <div id="letters">
+        </div>
+        <div id="letter"></div>
     </article>
 </section>
+<script type="text/template" id="tpl_cardView">
+    <article data-card='<%= id %>' class='card'>
+    <header>
+    <p class="dateCreated"><%= dateCreated %></p>
+    
+    <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+    <a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= businessName %>&description=test&link={{ site.url }}/letters/show/<%= id %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>
+    <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+    </header>
+    <p class="businessName">Dear <%= businessName %>,</p>
+    
+    <p class="loveMessage"><%= loveMessage %></p>
+    <p class="submitterName">- <%= submitterName %></p>
+    <footer>
+    <p class="permalink">
+        <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
+    </p>
+    </footer>
+    </article>
+    
+</script>
+<script type="text/template" id="tpl_cardDetailView">
+    <article data-card='<%= id %>' class='card-detail'>
+    <header>
+    <p class="dateCreated"><%= dateCreated %></p>
+    
+    <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+    <a href='https://www.facebook.com/dialog/send?app_id=441246329398694&name=A Buy Local Thank You to <%= businessName %>&description=test&link={{ site.url }}/letters/show/<%= id %>&redirect_uri=http://buylocal.thetyee.ca/fbr.php' target='_blank'><i class='fa fa-facebook-square fa-2x'></i></a>
+    <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+    </header>
+    <p class="businessName">Dear <%= businessName %>,</p>
+    
+    <p class="loveMessage"><%= loveMessage %></p>
+    <p class="submitterName">- <%= submitterName %></p>
+    <footer>
+    <p class="permalink">
+        <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
+    </p>
+    <a class='show-list button' href='#'>Back</a>
+    </footer>
+    </article>
+</script>
 
+<script type="text/template" id="tpl_cardListView">
+    <ul class='letters'></ul>
+    <br clear="all" />
+    <ul id="pagination">
+        <li class="first"><a href="#">First</a></li>
+        <li class="previous"><a href="#">Previous</a></li>
+        <li class="next"><a href="#">Next</a></li>
+        <li class="last"><a href="#">Last</a></li>
+    </ul>
+</script>
 
 <section>
     <article class="vancity-content">
         <script id="partner_template" type="x-tmpl-mustache">
-
         {% raw %}
         <dl>    
-        <img src="{{site.url}}/ui/img/{{{Image}}}"/>
+        <img src="/ui/img/{{{Image}}}"/>
         <a href="{{{Link}}}">{{Business}}</a>
         <a href="http://www.twitter.com/{{{Twitter}}}">@{{{Twitter}}}</a>
         <p>{{{Text}}}</p>
@@ -70,7 +120,7 @@ layout: default
         </dl>
         {% endraw %}
         </script>
-        <div id="partners"></div>
+        <div id="partners" class="partner-0"></div>
 
     </article>
 </section>
