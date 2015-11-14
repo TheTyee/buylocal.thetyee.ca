@@ -61,7 +61,7 @@ App.Cards = Backbone.PageableCollection.extend({
 
         // Required under server-mode
         totalRecords: 200,
-        pageSize: 20
+        pageSize: 18
     },
 
     // You can configure the mapping from a `Backbone.PageableCollection#state`
@@ -196,7 +196,12 @@ $(function(){
         "success": function(collection, response, options){
             App.router = new App.router();
             Backbone.history.start();
-                $('<article class="vancity-content"></article>').insertAfter('.letters >div:nth-child(6n-6)');
+            //Add template with jquery, so I can control how often the partner ads are surfaced
+            $('<section><article class="vancity-content"><script id="partner_template" type="x-tmpl-mustache"><dl><img src="{{site.url}}/ui/img/{{{Image}}}"/><a href="{{{Link}}}">{{Business}}</a><a href="http://www.twitter.com/{{{Twitter}}}">@{{{Twitter}}}</a><p>{{{Text}}}</p><a href="{{{Link}}}">Learn more</a></dl></script><div id="partners" class="partner_ad"></div></article></section>').insertAfter('.letters >div:nth-child(6n-120)');
+            //Add unique class to each partner ad, so all 3 ads will be different
+            $( '.partner_ad' ).each(function( index ) {
+                $(this).addClass('partner-'+ index);
+            });
         },
         "error": function(error) {
             // Oh noes!
