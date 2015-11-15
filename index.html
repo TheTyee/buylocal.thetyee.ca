@@ -43,34 +43,17 @@ layout: default
 </section>
 
 
-<section class="business-cards">
-    <h2 class="heading">Recent letters</h2>
-    <div class="button-wrapper">
-    Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
-    </div>
-    <article class="cards">
-    <div id="letters">
-    </div>
-    <div id="letter"></div>
-    </article>
-</section>
-
-
 <section>
-    <article class="vancity-content">
-        <script id="partner_template" type="x-tmpl-mustache">
-
-        {% raw %}
-        <dl>    
-        <img src="{{site.url}}/ui/img/{{{Image}}}"/>
-        <a href="{{{Link}}}">{{Business}}</a>
-        <a href="http://www.twitter.com/{{{Twitter}}}">@{{{Twitter}}}</a>
-        <p>{{{Text}}}</p>
-        <a href="{{{Link}}}">Learn more</a>
-        </dl>
-        {% endraw %}
-        </script>
-        <div id="partners"></div>
-
-    </article>
+    <div class="row">
+        <h2 class="heading">Recent letters</h2>
+        <div id="recent-letters">
+           <div class="index-letter-0"></div>
+           <div class="index-letter-1"></div>
+           <div class="index-letter-2"></div>
+        </div>
+    </div>
+<a class="button" href="/letters">Read more letters</a>
 </section>
+
+<div id="vancity-promo">
+</div>

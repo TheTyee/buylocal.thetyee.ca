@@ -7,6 +7,42 @@
 //= require backbone.js
 //= require backbone.paginator.js
 
+App.Promo = Backbone.Model.extend({
+    defaults: {
+        "Badge": "",
+        "Business": "",
+        "Image": "",
+        "Link": "",
+        "Text": "",
+        "Twitter": ""
+    },
+    initialize: function(){
+
+    }
+});
+
+App.Promos = Backbone.Collection.extend({
+    model: App.Promo
+});
+
+App.promos = new App.Promos();
+
+App.PromoView = Backbone.View.extend({
+    tagName: 'section',
+    events: {
+
+    },
+    initialize: function () {
+
+    },
+    template: _.template( $('#tpl_promoView').html() ),
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+
 App.Card = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -61,7 +97,7 @@ App.Cards = Backbone.PageableCollection.extend({
 
         // Required under server-mode
         totalRecords: 200,
-        pageSize: 20
+        pageSize: 18
     },
 
     // You can configure the mapping from a `Backbone.PageableCollection#state`
@@ -86,7 +122,7 @@ App.CardView = Backbone.View.extend({
     },
     template: _.template( $('#tpl_cardView').html() ),
     render: function() {
-        this.$el.html(this.template(this.model.attributes));
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
 });
@@ -103,7 +139,7 @@ App.CardDetailView = Backbone.View.extend({
     template: _.template( $('#tpl_cardDetailView').html() ),
     render: function() {
         this.$el.show();
-        this.$el.html(this.template(this.model.attributes));
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
     hide: function() {
@@ -123,22 +159,41 @@ App.CardsListView = Backbone.View.extend({
         "click li.next": function() { App.cards.getNextPage(); },
         "click li.previous": function() { App.cards.getPreviousPage(); },
         "click li.first": function() { App.cards.getFirstPage(); },
-        "click li.last": function() { App.cards.getLastPage(); }
+        "click li.last": function() { App.cards.getLastPage(); },
     },
     initialize: function () {
         this.listenTo(this.collection, 'update reset', this.render);
+        this.listenTo(App.promos, 'reset', this.render);
+        this.on('render', this.afterRender());
     },
     template: _.template( $('#tpl_cardListView').html() ),
     render: function () {
         this.$el.show();
         this.el.innerHTML = this.template();
-        var ul = this.$el.find("ul.letters");
-        this.collection.forEach(function (card) {
+        var ul = this.$el.find(".letters");
+        var count = 0;
+        this.collection.forEach(function (card, index) {
             ul.append(new App.CardView({
                 model: card
             }).render().el);
-        });
+            // TODO
+            // This could be re-written
+            // Basically, it adds a promo view after every 6th element
+            count++;
+            if ( count === 6 && App.promos.length > 0 ) { // Only if there are promos
+                var promo = App.promos.shift();
+                ul.append( new App.PromoView({
+                    model: promo
+                }).render().el);
+                // Put the promo back for an infinite list
+                App.promos.push(promo);
+                count = 0;
+            }
+        }, this);
         return this;
+    },
+    afterRender: function() {
+        // Not used, but useful! :-)
     },
     showCard: function(event) {
         var el = $(event.currentTarget);
@@ -192,6 +247,21 @@ App.router = Backbone.Router.extend({
 });
 
 $(function(){
+    Tabletop.init({ 
+        key: App.promosUrl, 
+        callback: function(data, tabletop) {
+        var promoCards = data.Sheet1.elements;
+        // Randomize the promos
+        promoCards     = _.shuffle(promoCards);
+        // Add all the promos at once to a collection
+        // & fire the reset event, which re-renders the CardsListView
+        App.promos.reset(promoCards);
+        var frontPromoModel = App.promos.shift();
+        var frontPromo = new App.PromoView({ model: frontPromoModel });
+        var frontPromoHTML = frontPromo.render().el;
+        $('#vancity-promo').append( frontPromoHTML );
+        }
+    });
     App.cards.fetch({
         "success": function(collection, response, options){
             App.router = new App.router();
@@ -203,4 +273,3 @@ $(function(){
         }
     });
 });
-
