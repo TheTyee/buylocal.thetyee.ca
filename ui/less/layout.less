@@ -45,9 +45,8 @@ LAYOUT :: SIDEBAR
 LAYOUT :: BUSINESS CARDS
 ========================================================================== */ 
 
-.letters div {
+.letters div, #recent-letters div {
    .make-md-column(4);
-
 
    article {
       padding: 10px!important;
@@ -99,4 +98,18 @@ LAYOUT :: PAGE :: PRIZES
     line-height: 24px;
   }
 
+}
+
+.vancity-content {
+  .vancity-left, .vancity-right {
+    .vancity-photo {
+      .make-md-column(12);
+      position: relative;
+    }
+    .loco-tag {
+      z-index: 9999;
+    }
+    position: relative;
+    .make-md-column(6);
+  }
 }

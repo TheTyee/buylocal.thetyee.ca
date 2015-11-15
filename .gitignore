@@ -10,3 +10,4 @@ Gemfile.lock
 .bundle
 _gdrive_cache
 contests.csv
+NOTES.md

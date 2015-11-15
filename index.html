@@ -43,23 +43,21 @@ layout: default
 </section>
 
 
-<section class="business-cards">
-    <h2 class="heading">Recent letters</h2>
-    <div class="button-wrapper">
-    Sort Cards: <button>Alphabetically</button> | <button>By Date</button>
+<section>
+    <div class="row">
+        <h2 class="heading">Recent letters</h2>
+        <div id="recent-letters">
+           <div class="index-letter-0"></div>
+           <div class="index-letter-1"></div>
+           <div class="index-letter-2"></div>
+        </div>
     </div>
-    <article class="cards">
-    <div id="letters">
-    </div>
-    <div id="letter"></div>
-    </article>
+<a class="button" href="/letters">Read more letters</a>
 </section>
-
 
 <section>
     <article class="vancity-content">
         <script id="partner_template" type="x-tmpl-mustache">
-
         {% raw %}
         <dl>    
         <img src="{{site.url}}/ui/img/{{{Image}}}"/>
@@ -70,7 +68,7 @@ layout: default
         </dl>
         {% endraw %}
         </script>
-        <div id="partners"></div>
+        <div id="partners" class="partner-0"></div>
 
     </article>
 </section>
