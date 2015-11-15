@@ -101,8 +101,15 @@ LAYOUT :: PAGE :: PRIZES
 }
 
 .vancity-content {
-  img {
-    .make-md-column(4);
-    padding: 10px;
+  .vancity-left, .vancity-right {
+    .vancity-photo {
+      .make-md-column(12);
+      position: relative;
+    }
+    .loco-tag {
+      z-index: 9999;
+    }
+    position: relative;
+    .make-md-column(6);
   }
 }

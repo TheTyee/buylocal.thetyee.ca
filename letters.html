@@ -60,9 +60,16 @@ title:     Readers' Cards
 <script id="tpl_promoView" type="text/template">
     <section>
         <article class="vancity-content">
-            <img src="{{ site.url }}/ui/img/<%= Image %>"/><a href="<%= Link %>"><%= Business %></a><a href="http://www.twitter.com/<%= Twitter %>">@<%= Twitter %></a>
-            <p><%= Text %></p>
-            <a href="<%= Link %>">Learn more</a>
+            <div class="vancity-left">
+                <img class="loco-tag" src="{{site.url}}/ui/img/loco-tag.png"/>
+                <img class="vancity-photo" src="{{ site.url }}/ui/img/<%= Image %>"/>
+            </div>
+            <div class="vancity-right">
+            <h2><a href="<%= Link %>"><%= Business %></a></h2>
+                <p class="twitter"><a href="http://www.twitter.com/<%= Twitter %>">@<%= Twitter %></a></p>
+                <p><%= Text %></p>
+                <a class="vancity-learn-more" href="<%= Link %>">Learn more</a>
+            </div>
         </article>
     </section>
 </script>
