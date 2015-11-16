@@ -170,10 +170,10 @@ App.CardsListView = Backbone.View.extend({
     render: function () {
         this.$el.show();
         this.el.innerHTML = this.template();
-        var ul = this.$el.find(".letters");
+        var target = this.$el.find(".letters");
         var count = 0;
         this.collection.forEach(function (card, index) {
-            ul.append(new App.CardView({
+            target.append(new App.CardView({
                 model: card
             }).render().el);
             // TODO
@@ -182,7 +182,7 @@ App.CardsListView = Backbone.View.extend({
             count++;
             if ( count === 6 && App.promos.length > 0 ) { // Only if there are promos
                 var promo = App.promos.shift();
-                ul.append( new App.PromoView({
+                target.append( new App.PromoView({
                     model: promo
                 }).render().el);
                 // Put the promo back for an infinite list
