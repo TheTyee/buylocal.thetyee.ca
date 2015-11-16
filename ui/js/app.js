@@ -211,6 +211,10 @@ App.router = Backbone.Router.extend({
         "show/:id":    "letterShow"
     },
     lettersList: function() {
+        // For now, only run this function if we're on the /letters page
+        var path = window.location.pathname.replace(/[\\\/][^\\\/]*$/, '');
+        if ( path != '/letters')
+            return;
         console.log('Default route / Card list');
         App.cardsListView = new App.CardsListView();
         App.cardsListView.render();
