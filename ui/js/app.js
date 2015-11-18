@@ -17,6 +17,7 @@ App.Business = Backbone.Model.extend({
     },
     parse: function(response, options) {
         var d = response;
+
         return {
             "businessName": d.business_name,
             "businessLocation": d.business_city,
@@ -28,7 +29,7 @@ App.Businesses = Backbone.Collection.extend({
     model: App.Business,
     url: App.apiUrl + '/api/v1/businesses',
     parse: function(response, options) {
-        return response.data.letters;
+        return response.data.businesses;
     }
 
 });
