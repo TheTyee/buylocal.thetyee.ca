@@ -7,6 +7,62 @@
 //= require backbone.js
 //= require backbone.paginator.js
 
+App.Business = Backbone.Model.extend({
+    defaults: {
+        "businessName": "",
+        "businessLocation": "",
+        "businessUrl": ""
+    },
+    initialize: function(){
+    },
+    parse: function(response, options) {
+        var d = response;
+        return {
+            "businessName": d.business_name,
+            "businessLocation": d.business_city,
+            "businessUrl": d.business_url
+        };
+    },
+});
+App.Businesses = Backbone.Collection.extend({
+    model: App.Business,
+    url: App.apiUrl + '/api/v1/businesses',
+    parse: function(response, options) {
+        return response.data.letters;
+    }
+
+});
+App.businesses = new App.Businesses();
+
+App.BusinessView = Backbone.View.extend({
+    template: _.template( $('#tpl_businessView').html() ),
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+App.BusinessesListView = Backbone.View.extend({
+    collection: App.businesses,
+    el: '#business-listing',
+    events: {
+    },
+    initialize: function () {
+        this.listenTo(this.collection, 'update reset', this.render);
+    },
+    template: _.template( $('#tpl_businessListView').html() ),
+    render: function () {
+        this.el.innerHTML = this.template();
+        var target = this.$el.find(".businesses");
+        this.collection.forEach(function (business, index) {
+            target.append(new App.BusinessView({
+                model: business
+            }).render().el);
+        }, this);
+        return this;
+    }
+});
+
 App.Promo = Backbone.Model.extend({
     defaults: {
         "Badge": "",
@@ -218,21 +274,25 @@ App.CardsListView = Backbone.View.extend({
 
 App.router = Backbone.Router.extend({
     routes: {
-        "":            "lettersList",
+        "":            "showList",
         "show/:id":    "letterShow"
     },
-    lettersList: function() {
+    showList: function() {
         // For now, only run this function if we're on the /letters page
         var path = window.location.pathname.replace(/[\\\/][^\\\/]*$/, '');
-        if ( path != '/letters')
-            return;
-        console.log('Default route / Card list');
-        App.cardsListView = new App.CardsListView();
-        App.cardsListView.render();
-        if ( App.cardDetailView ) {
-            // Hide it
-            App.cardDetailView.hide();
-        }
+        if ( path == '/letters') {
+            console.log('Default route / Card list');
+            App.cardsListView = new App.CardsListView();
+            App.cardsListView.render();
+            if ( App.cardDetailView ) {
+                // Hide it
+                App.cardDetailView.hide();
+            }
+        } else if ( path == '/businesses' ) { 
+            console.log('Default route / Business list');
+            App.businessesListView = new App.BusinessesListView();
+            App.businessesListView.render();
+        } else { return; }
     },
     letterShow: function(id) {
         console.log('Card detail');
@@ -287,4 +347,5 @@ $(function(){
 
         }
     });
+    App.businesses.fetch();
 });
