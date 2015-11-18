@@ -50,11 +50,13 @@ App.Card = Backbone.Model.extend({
         "businessUrl": "",
         "loveMessage": "",
         "submitterName": ""
+   
     },
     parse: function(response, options) {
         // TODO response parsing is kinda' borked
         // and it would be good to fix it.
         var d;
+
         if (        _.isUndefined(response.data) ) {
             d = response;
         } else {
@@ -67,11 +69,20 @@ App.Card = Backbone.Model.extend({
             "businessUrl": d.business_url,
             "dateCreated": d.date_created,
             "loveMessage": d.letter_text,
-            "submitterName": d.first_name
+            "submitterName": d.first_name,
+            "momentDate": ''
         };
     },
     urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
+            //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
+            var rawDate = this.get('dateCreated');
+            //Trim string to just what I need
+            rawDate = rawDate.split(' ', 1);
+            //Specify formatting
+            var date = moment(rawDate[0]).format("MMMM D, YYYY");            
+            //put back what I want.
+            this.set('momentDate', date );
     }
 });
 
