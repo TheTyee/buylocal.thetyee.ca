@@ -7,6 +7,8 @@ $(document).ready(function(){
 
         for (i=0;i<3;++i){	
             indexLetters = data.data.letters[i];
+            indexLetters.date_created = indexLetters.date_created.split(' ', 1);
+            indexLetters.date_created = moment(indexLetters.date_created[0]).format("MMMM D, YYYY");
             //console.log(indexLetters);
             html = "<article data-card='"+ indexLetters.entry_id +"' class='card'>";
             html += "<header><p class='dateCreated'>"+indexLetters.date_created+"</p>";
