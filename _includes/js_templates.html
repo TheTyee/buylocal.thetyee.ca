@@ -3,13 +3,12 @@
 </script>
 <script type="text/template" id="tpl_businessListView">
     <ul class="businesses">
-    
+
     </ul>
 </script>
 <script type="text/template" id="tpl_cardView">
     <article data-card='<%= id %>' class='card'>
     <header>
-        <p class="dateCreated"><%= momentDate %></p>
         <a href='https://twitter.com/share?url={{ site.url }}/letters/#show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
          <div class="fb-share-button" 
             data-href="{{ site.url }}/letters/#show/<%= id %>" 
@@ -17,12 +16,13 @@
         </div>
         <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/#show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
 
-        <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+        <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
     </header>
     <p class="businessName">Dear <%= businessName %>,</p>
     <p class="loveMessage"><%= loveMessage %></p>
-    <p class="submitterName">- <%= submitterName %></p>
+    <p class="submitterName">- <em><%= submitterName %></em></p>
     <footer>
+        <p class="dateCreated"><%= momentDate %></p>
         <p class="permalink">
             <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
         </p>
@@ -32,19 +32,20 @@
 <script type="text/template" id="tpl_cardDetailView">
     <article data-card='<%= id %>' class='card-detail'>
         <header>
-            <p class="dateCreated"><%= momentDate %></p>
+
             <a href='https://twitter.com/share?url={{ site.url }}/letters/#show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
          <div class="fb-share-button" 
             data-href="{{ site.url }}/letters/#show/<%= id %>" 
             data-layout="button">
         </div>
         <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/#show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
-            <a class='email-share' target='_blank' href='mailto:?subject=Buy Local&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+            <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
         </header>
         <p class="businessName">Dear <%= businessName %>,</p>
         <p class="loveMessage"><%= loveMessage %></p>
-        <p class="submitterName">- <%= submitterName %></p>
+        <p class="submitterName">- <em><%= submitterName %></em></p>
         <footer>
+            <p class="dateCreated"><%= momentDate %></p>
             <p class="permalink">
                 <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
             </p>
@@ -74,7 +75,9 @@
             <h2><a href="<%= Link %>"><%= Business %></a></h2>
                 <p class="twitter"><a href="http://www.twitter.com/<%= Twitter %>">@<%= Twitter %></a></p>
                 <p><%= Text %></p>
-                <a class="vancity-learn-more" href="<%= Link %>">Learn more</a>
+                 <a class="vancity-learn-more" href="<%= Link %>">Learn more</a>
+                <p class="bcbuylocal"><a href="https://twitter.com/search?q=bcbuylocal" target="_blank">#BCBUYLOCAL</a></p>
+               
             </div>
         </article>
     </section>
