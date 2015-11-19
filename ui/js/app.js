@@ -7,6 +7,43 @@
 //= require backbone.js
 //= require backbone.paginator.js
 
+
+// ===================================================================
+// Utilities
+// ===================================================================
+
+App.updateMeta = function(model) {
+
+    var title = model.get('businessName');
+   // var place = model.get('businessLocation');
+    //var image = model.get('image');
+    var path  = model.get('id');
+    var domain = 'http://buylocal.thetyee.ca/letters/#show/';
+    var url = domain + path
+    //var url =  domain + path;
+
+        $('title').remove();
+        $('meta[property="og:title"]').remove();
+        $('meta[property="DC.title"]').remove();
+        $('meta[property="description"]').remove();
+        $('meta[property="DC.description"]').remove();
+        $('meta[property="og:description"]').remove();
+        $('meta[property="og:image"]').remove();
+        $('meta[property="og:image:url"]').remove();
+        $('meta[property="og:url"]').remove();
+        $("head").append('<title>' + title + '</title>');
+        $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
+        $("head").append('<meta property="og:description" content="Read my holiday greeting for ' + title + ' and complete your own for a chance to win.">');
+        $("head").append('<meta property="og:url" content=" ' + url + '">');
+
+    
+};
+
+// ===================================================================
+// Business List
+// ===================================================================
+
+
 App.Business = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -64,6 +101,10 @@ App.BusinessesListView = Backbone.View.extend({
     }
 });
 
+// ===================================================================
+// Promo Cards
+// ===================================================================
+
 App.Promo = Backbone.Model.extend({
     defaults: {
         "Badge": "",
@@ -99,6 +140,9 @@ App.PromoView = Backbone.View.extend({
     }
 });
 
+// ===================================================================
+// Business Letter Cards
+// ===================================================================
 
 App.Card = Backbone.Model.extend({
     defaults: {
@@ -201,21 +245,32 @@ App.CardDetailView = Backbone.View.extend({
         "click .show-list": "showList"
     },
 
-    initialize: function () {
+    initialize: function (options) {
+
+        //console.log(options.model.attributes.businessName);
+        //when you get a card, write the meta tags
+        var model = options.model
+        console.log(model);
+        console.log(model.get('businessName'));
+        App.updateMeta(model);
 
     },
+
     template: _.template( $('#tpl_cardDetailView').html() ),
     render: function() {
         this.$el.show();
         this.$el.html(this.template(this.model.toJSON()));
         return this;
+
     },
     hide: function() {
         this.$el.hide();
     },
-    showList: function() {
+    showList: function(card) {
         App.router.navigate('#', { trigger: true } );
-    }
+    },
+
+
 });
 
 
@@ -273,6 +328,10 @@ App.CardsListView = Backbone.View.extend({
     }
 });
 
+// ===================================================================
+// Router
+// ===================================================================
+
 App.router = Backbone.Router.extend({
     routes: {
         "":            "showList",
@@ -321,6 +380,10 @@ App.router = Backbone.Router.extend({
         }
     }
 });
+
+// ===================================================================
+// Render the app
+// ===================================================================
 
 $(function(){
     Tabletop.init({ 
