@@ -32,7 +32,6 @@ App.updateMeta = function(model) {
     
     $("head").append('<title>' + title + '</title>');
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
-    $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
     $("head").append('<meta property="og:url" content=" ' + url + '">');
     $("head").append('<meta property="og:image" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
