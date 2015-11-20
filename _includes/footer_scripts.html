@@ -7,7 +7,7 @@ App.promosUrl = '{{ site.tabletop.promos }}';
 {% include js_templates.html %}
 {% javascript app.js %}
 
-
+{% unless page.url == '/letters/' %}
 <script type="text/javascript">
     var userFeed = new Instafeed({
         get: 'tagged',
@@ -25,6 +25,7 @@ App.promosUrl = '{{ site.tabletop.promos }}';
    });
    userFeed.run();
 </script>
+{% endunless %}
 
 {% if site.mode == 'development-w-grunt' %}
     <script src="//localhost:35729/livereload.js"></script>
