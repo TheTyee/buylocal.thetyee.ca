@@ -197,6 +197,7 @@ App.Card = Backbone.Model.extend({
     initialize: function(){
         //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
         var rawDate = this.get('dateCreated');
+        console.log(rawDate);
         //Trim string to just what I need
         rawDate = rawDate.split(' ', 1);
         //Specify formatting
@@ -438,6 +439,7 @@ App.Router = Backbone.Router.extend({
         $('.panels').hide();
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
+        console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     }
