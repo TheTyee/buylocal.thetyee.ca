@@ -310,6 +310,7 @@ App.CardsListView = Backbone.View.extend({
     },
     showCard: function(event) {
         event.preventDefault();
+        window.scrollTo(0, 0);
         var el = $(event.currentTarget);
         var cardId = el.data("card");
         App.router.navigate('letter/show/' + cardId, { trigger: true } );
@@ -345,6 +346,7 @@ App.CardsPreviewListView = Backbone.View.extend({
     showCard: function(event) {
         event.preventDefault();
         var el = $(event.currentTarget);
+        window.scrollTo(0, 0);
         var cardId = el.data("card");
         App.router.navigate('letter/show/' + cardId, { trigger: true } );
     },
