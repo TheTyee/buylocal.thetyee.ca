@@ -25,9 +25,13 @@ App.updateMeta = function(model) {
     $('meta[property="og:image"]').remove();
     $('meta[property="og:image:url"]').remove();
     $('meta[property="og:url"]').remove();
+    $('meta[property="og:type"]').remove();
+    $('meta[property="og:site_name"]').remove();
+    $('meta[property="fb:admins"]').remove();
     $("head").append('<title>' + title + '</title>');
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
-    $("head").append('<meta property="og:description" content="Read my holiday greeting for ' + title + ' and complete your own for a chance to win.">');
+    $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
+    $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
     $("head").append('<meta property="og:url" content=" ' + url + '">');
 };
 
