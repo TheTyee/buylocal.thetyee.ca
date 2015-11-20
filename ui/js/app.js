@@ -28,11 +28,15 @@ App.updateMeta = function(model) {
     $('meta[property="og:type"]').remove();
     $('meta[property="og:site_name"]').remove();
     $('meta[property="fb:admins"]').remove();
+    $('meta[property="twitter:image:src"]').remove();
+    
     $("head").append('<title>' + title + '</title>');
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
     $("head").append('<meta property="og:url" content=" ' + url + '">');
+    $("head").append('<meta property="og:image" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
+    $("head").append('<meta property="twitter:image:src" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
 };
 
 // ===================================================================
