@@ -69,7 +69,11 @@ $(function(){
     App.cards.fetch({
         "success": function(collection, response, options){
             App.router = new App.router();
-            Backbone.history.start();
+             {% if site.mode != 'development' %}
+              Backbone.history.start({ pushState: true });
+              {% else %}
+                      Backbone.history.start();
+              {% endif %}
         },
         "error": function(error) {
             // Oh noes!
@@ -78,10 +82,6 @@ $(function(){
     });
     App.businesses.fetch();
 });
-      {% if site.mode != 'development' %}
-              Backbone.history.start({ pushState: true });
-      {% else %}
-              Backbone.history.start();
-      {% endif %}
+     
 </script>
 {% endif %}
