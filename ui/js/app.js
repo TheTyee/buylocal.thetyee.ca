@@ -328,7 +328,7 @@ App.CardsListView = Backbone.View.extend({
 App.Router = Backbone.Router.extend({
     routes: {
         "":            "showList",
-        "!/show/:id":    "letterShow"
+        "show/:id":    "letterShow"
     },
     showList: function() {
         // For now, only run this function if we're on the /letters page
