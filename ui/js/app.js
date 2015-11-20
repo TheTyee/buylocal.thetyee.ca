@@ -40,7 +40,6 @@ App.updateMeta = function(model) {
     $("head").append('<meta property="twitter:image:src" content="' + App.rootUrl + '/ui/img/share-letter.png">');
 };
 
-    console.log(App);
 
 // ===================================================================
 // Businesses
