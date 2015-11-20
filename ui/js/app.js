@@ -207,6 +207,7 @@ App.Card = Backbone.Model.extend({
         //put back what I want.
         this.set('momentDate', date );
     }
+
 });
 
 App.Cards = Backbone.PageableCollection.extend({
