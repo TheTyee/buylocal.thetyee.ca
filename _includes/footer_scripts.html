@@ -44,11 +44,11 @@ App.promosUrl = '{{ site.tabletop.promos }}';
       ga('send', 'pageview');
 
     </script>
-  {% endif %}
+{% endif %}
+
+
+
     <script>
-    // ===================================================================
-// Render the app
-// ===================================================================
 
 $(function(){
     Tabletop.init({ 
@@ -69,12 +69,12 @@ $(function(){
     App.cards.fetch({
         "success": function(collection, response, options){
             App.router = new App.router();
-             {% if site.mode != 'development' %}
-              Backbone.history.start({ pushState: true });
-              {% else %}
-                      Backbone.history.start();
-              {% endif %}
-        },
+              {% if site.mode != 'development' %}
+                    Backbone.history.start({ pushState: true });
+            {% else %}
+                    Backbone.history.start();
+            {% endif %}
+              },
         "error": function(error) {
             // Oh noes!
 
@@ -82,6 +82,8 @@ $(function(){
     });
     App.businesses.fetch();
 });
-     
+
+
+   
 </script>
 
