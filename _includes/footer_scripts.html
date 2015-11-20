@@ -68,7 +68,7 @@ $(function(){
     });
     App.cards.fetch({
         "success": function(collection, response, options){
-            App.Router = new App.router();
+            App.router = new App.Router();
               {% if site.mode != 'development' %}
                     Backbone.history.start({ pushState: true });
             {% else %}
