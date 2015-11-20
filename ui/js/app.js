@@ -18,7 +18,7 @@ App.updateMeta = function(model) {
    // var place = model.get('businessLocation');
     //var image = model.get('image');
     var path  = model.get('id');
-    var domain = 'https://develop.buylocal.thetyee.ca/letters/#show/';
+    var domain = 'https://develop.buylocal.thetyee.ca/letters/#!/show/';
     var url = domain + path
     //var url =  domain + path;
 
@@ -250,18 +250,11 @@ App.CardDetailView = Backbone.View.extend({
         //console.log(options.model.attributes.businessName);
         //when you get a card, write the meta tags
         var model = options.model
-        console.log(model);
-        console.log(model.get('businessName'));
+      //  console.log(model);
+       // console.log(model.get('businessName'));
         App.updateMeta(model);
-         if ( model.get('css') && model.get('css-loaded') !== true ) {
-            var css = model.get('css');
-            $('<link>')
-            .appendTo('head')
-            .attr({type : 'text/css', rel : 'stylesheet'})
-            .attr('href', css);
-            model.set("css-loaded", true);
-            console.log('cssnottrue');
-        }
+        
+
 
     },
 
@@ -330,7 +323,7 @@ App.CardsListView = Backbone.View.extend({
     showCard: function(event) {
         var el = $(event.currentTarget);
         var cardId = el.data("card");
-        App.router.navigate('/show/' + cardId, { trigger: true } );
+        App.router.navigate('/!/show/' + cardId, { trigger: true } );
     },
     hide: function() {
         this.$el.hide();
@@ -341,10 +334,12 @@ App.CardsListView = Backbone.View.extend({
 // Router
 // ===================================================================
 
+
+
 App.router = Backbone.Router.extend({
     routes: {
         "":            "showList",
-        "show/:id":    "letterShow"
+        "!/show/:id":    "letterShow"
     },
     showList: function() {
         // For now, only run this function if we're on the /letters page
