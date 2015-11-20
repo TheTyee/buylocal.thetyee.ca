@@ -88,3 +88,5 @@ assets:
   js_compressor: yui
   css_compressor: yui
   cache: true
+  debug: true
+  cachebust: none
