@@ -244,18 +244,9 @@ App.CardDetailView = Backbone.View.extend({
     events: {
         "click .show-list": "showList"
     },
-
     initialize: function (options) {
-
-        //console.log(options.model.attributes.businessName);
-        //when you get a card, write the meta tags
         var model = options.model
-      //  console.log(model);
-       // console.log(model.get('businessName'));
         App.updateMeta(model);
-        
-
-
     },
 
     template: _.template( $('#tpl_cardDetailView').html() ),
@@ -263,16 +254,14 @@ App.CardDetailView = Backbone.View.extend({
         this.$el.show();
         this.$el.html(this.template(this.model.toJSON()));
         return this;
-
     },
+
     hide: function() {
         this.$el.hide();
     },
     showList: function(card) {
         App.router.navigate('#', { trigger: true } );
     },
-
-
 });
 
 

@@ -44,4 +44,12 @@ App.promosUrl = '{{ site.tabletop.promos }}';
       ga('send', 'pageview');
 
     </script>
+
+    <script>
+      {% if site.mode != 'development' %}
+              Backbone.history.start({ pushState: true });
+      {% else %}
+              Backbone.history.start();
+      {% endif %}
+</script>
 {% endif %}
