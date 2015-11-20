@@ -7,43 +7,32 @@
 //= require backbone.js
 //= require backbone.paginator.js
 
-
 // ===================================================================
 // Utilities
 // ===================================================================
-
 App.updateMeta = function(model) {
-
     var title = model.get('businessName');
-   // var place = model.get('businessLocation');
-    //var image = model.get('image');
     var path  = model.get('id');
     var domain = 'https://develop.buylocal.thetyee.ca/letters/#!/show/';
-    var url = domain + path
-    //var url =  domain + path;
-
-        $('title').remove();
-        $('meta[property="og:title"]').remove();
-        $('meta[property="DC.title"]').remove();
-        $('meta[property="description"]').remove();
-        $('meta[property="DC.description"]').remove();
-        $('meta[property="og:description"]').remove();
-        $('meta[property="og:image"]').remove();
-        $('meta[property="og:image:url"]').remove();
-        $('meta[property="og:url"]').remove();
-        $("head").append('<title>' + title + '</title>');
-        $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
-        $("head").append('<meta property="og:description" content="Read my holiday greeting for ' + title + ' and complete your own for a chance to win.">');
-        $("head").append('<meta property="og:url" content=" ' + url + '">');
-
-    
+    var url = domain + path;
+    $('title').remove();
+    $('meta[property="og:title"]').remove();
+    $('meta[property="DC.title"]').remove();
+    $('meta[property="description"]').remove();
+    $('meta[property="DC.description"]').remove();
+    $('meta[property="og:description"]').remove();
+    $('meta[property="og:image"]').remove();
+    $('meta[property="og:image:url"]').remove();
+    $('meta[property="og:url"]').remove();
+    $("head").append('<title>' + title + '</title>');
+    $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
+    $("head").append('<meta property="og:description" content="Read my holiday greeting for ' + title + ' and complete your own for a chance to win.">');
+    $("head").append('<meta property="og:url" content=" ' + url + '">');
 };
 
 // ===================================================================
-// Business List
+// Businesses
 // ===================================================================
-
-
 App.Business = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -101,10 +90,34 @@ App.BusinessesListView = Backbone.View.extend({
     }
 });
 
-// ===================================================================
-// Promo Cards
-// ===================================================================
+App.BusinessDetailView = Backbone.View.extend({
+    el: '#business-detail',
+    events: {
+        "click .show-list": "showList"
+    },
+    initialize: function (options) {
+        // TODO Update the meta when it makes sense to do so...
+    },
 
+    template: _.template( $('#tpl_businessDetailView').html() ),
+    render: function() {
+        this.$el.show();
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+    hide: function() {
+        this.$el.hide();
+    },
+    showList: function(event) {
+        event.preventDefault();
+        App.router.navigate('businesses', { trigger: true } );
+    }
+});
+
+
+// ===================================================================
+// Promotions
+// ===================================================================
 App.Promo = Backbone.Model.extend({
     defaults: {
         "Badge": "",
@@ -141,9 +154,8 @@ App.PromoView = Backbone.View.extend({
 });
 
 // ===================================================================
-// Business Letter Cards
+// Cards / Love letters
 // ===================================================================
-
 App.Card = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -151,7 +163,6 @@ App.Card = Backbone.Model.extend({
         "businessUrl": "",
         "loveMessage": "",
         "submitterName": ""
-   
     },
     parse: function(response, options) {
         // TODO response parsing is kinda' borked
@@ -176,48 +187,34 @@ App.Card = Backbone.Model.extend({
     },
     urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
-            //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
-            var rawDate = this.get('dateCreated');
-            //Trim string to just what I need
-            rawDate = rawDate.split(' ', 1);
-            //Specify formatting
-            var date = moment(rawDate[0]).format("MMMM D, YYYY");            
-            //put back what I want.
-            this.set('momentDate', date );
+        //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
+        var rawDate = this.get('dateCreated');
+        //Trim string to just what I need
+        rawDate = rawDate.split(' ', 1);
+        //Specify formatting
+        var date = moment(rawDate[0]).format("MMMM D, YYYY");
+        //put back what I want.
+        this.set('momentDate', date );
     }
 });
 
 App.Cards = Backbone.PageableCollection.extend({
     model: App.Card,
+      mode: "infinite",
     url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
         return response.data.letters;
     },
     initialize: function() {
     },
-    // Any `state` or `queryParam` you override in a subclass will be merged with
-    // the defaults in `Backbone.PageableCollection` 's prototype.
     state: {
 
-        // You can use 0-based or 1-based indices, the default is 1-based.
-        // You can set to 0-based by setting ``firstPage`` to 0.
         firstPage: 1,
-
-        // Set this to the initial page index if different from `firstPage`. Can
-        // also be 0-based or 1-based.
         currentPage: 1,
-
-        // Required under server-mode
         totalRecords: 200,
         pageSize: 18
     },
-
-    // You can configure the mapping from a `Backbone.PageableCollection#state`
-    // key to the query string parameters accepted by your server API.
     queryParams: {
-
-        // `Backbone.PageableCollection#queryParams` converts to ruby's
-        // will_paginate keys by default.
         currentPage: "page",
         pageSize: "limit"
     }
@@ -245,7 +242,7 @@ App.CardDetailView = Backbone.View.extend({
         "click .show-list": "showList"
     },
     initialize: function (options) {
-        var model = options.model
+        var model = options.model;
         App.updateMeta(model);
     },
 
@@ -259,15 +256,16 @@ App.CardDetailView = Backbone.View.extend({
     hide: function() {
         this.$el.hide();
     },
-    showList: function(card) {
-        App.router.navigate('#', { trigger: true } );
-    },
+    showList: function(event) {
+        event.preventDefault();
+        App.router.navigate('letters', { trigger: true } );
+    }
 });
 
 
 App.CardsListView = Backbone.View.extend({
     collection: App.cards,
-    el: '#letters',
+    el: '#letters-list',
     events: {
         "click .card": "showCard",
         "click li.next": function() { App.cards.getNextPage(); },
@@ -276,7 +274,7 @@ App.CardsListView = Backbone.View.extend({
         "click li.last": function() { App.cards.getLastPage(); },
     },
     initialize: function () {
-        this.listenTo(this.collection, 'update reset', this.render);
+        this.listenTo(this.collection.fullCollection, 'update reset', this.render);
         this.listenTo(App.promos, 'reset', this.render);
         this.on('render', this.afterRender());
     },
@@ -286,7 +284,7 @@ App.CardsListView = Backbone.View.extend({
         this.el.innerHTML = this.template();
         var target = this.$el.find(".letters");
         var count = 0;
-        this.collection.forEach(function (card, index) {
+        this.collection.fullCollection.forEach(function (card, index) {
             target.append(new App.CardView({
                 model: card
             }).render().el);
@@ -310,9 +308,49 @@ App.CardsListView = Backbone.View.extend({
         // Not used, but useful! :-)
     },
     showCard: function(event) {
+        event.preventDefault();
         var el = $(event.currentTarget);
         var cardId = el.data("card");
-        App.router.navigate('/show/' + cardId, { trigger: true } );
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
+    },
+    hide: function() {
+        this.$el.hide();
+    }
+});
+
+App.CardsPreviewListView = Backbone.View.extend({
+    collection: App.cards,
+    el: '#recent-letters',
+    events: {
+        "click .card": "showCard",
+        "click .showFullList": "showList"
+    },
+    initialize: function () {
+        this.listenTo(this.collection, 'update reset', this.render);
+    },
+    template: _.template( $('#tpl_cardPromoListView').html() ),
+    render: function () {
+        this.$el.show();
+        this.el.innerHTML = this.template();
+        var target = this.$el.find(".letters");
+        var preview = this.collection.slice(0,3);
+        preview.forEach(function (card, index) {
+            target.append(new App.CardView({
+                model: card
+            }).render().el);
+        }, this);
+        return this;
+    },
+    showCard: function(event) {
+        event.preventDefault();
+        var el = $(event.currentTarget);
+        var cardId = el.data("card");
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
+    },
+    showList: function(event) {
+        console.log(event);
+        event.preventDefault();        
+        App.router.navigate('letters', { trigger: true } );
     },
     hide: function() {
         this.$el.hide();
@@ -322,33 +360,46 @@ App.CardsListView = Backbone.View.extend({
 // ===================================================================
 // Router
 // ===================================================================
-
-
-
 App.Router = Backbone.Router.extend({
+    // Assume that any pages with cards or businesses showing are Backbone-powered
+    // Static pages: /prizes, /about, etc. are not
     routes: {
-        "":            "showList",
-        "show/:id":    "letterShow"
+        "":                   "showFront",
+        "letters":            "showLetters",
+        "businesses":            "showBusinesses",
+        "letter/show/:id":    "letterShow",
+        "business/show/:id":    "businessShow"
     },
-    showList: function() {
-        // For now, only run this function if we're on the /letters page
-        var path = window.location.pathname.replace(/[\\\/][^\\\/]*$/, '');
-        if ( path == '/letters') {
-            console.log('Default route / Card list');
-            App.cardsListView = new App.CardsListView();
-            App.cardsListView.render();
-            if ( App.cardDetailView ) {
-                // Hide it
-                App.cardDetailView.hide();
-            }
-        } else if ( path == '/businesses' ) { 
-            console.log('Default route / Business list');
-            App.businessesListView = new App.BusinessesListView();
-            App.businessesListView.render();
-        } else { return; }
+    showFront: function() {
+        console.log('Front page');
+        // Show only the front page panel
+        $('.panels').hide();
+        $('.panel-front').show();
+        var cardPreview = new App.CardsPreviewListView();
+        cardPreview.render();
+    },
+    showLetters: function() {
+        console.log('Letters list');
+        $('.panels').hide();
+        $('.panel-letters').show();
+        App.cardsListView = new App.CardsListView();
+        App.cardsListView.render();
+        if ( App.cardDetailView ) {
+            // Hide it
+            App.cardDetailView.hide();
+        }
+    },
+    showBusinesses: function() {
+        console.log('Businesses list');
+        $('.panels').hide();
+        $('.panel-businesses').show();
+        App.businessesListView = new App.BusinessesListView();
+        App.businessesListView.render();
     },
     letterShow: function(id) {
         console.log('Card detail');
+        $('.panels').hide();
+        $('.panel-letter').show();
         var card = App.cards.get(id);
         // TODO Fix this silliness
         // If the card is accessed directly
@@ -371,11 +422,15 @@ App.Router = Backbone.Router.extend({
             // Hide the list?
             App.cardsListView.hide();
         }
+    },
+    businessShow: function(id) {
+        console.log('Business detail');
+        //console.log(id);
+        $('.panels').hide();
+        $('.panel-business').show();
+        var business = App.businesses.findWhere({"businessName": '4Cats' });
+        console.log(business);
+        App.businessDetailView = new App.BusinessDetailView({ model: business });
+        App.businessDetailView.render();
     }
 });
-
-// ===================================================================
-// Render the app
-// ===================================================================
-
-
