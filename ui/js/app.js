@@ -18,7 +18,7 @@ App.updateMeta = function(model) {
    // var place = model.get('businessLocation');
     //var image = model.get('image');
     var path  = model.get('id');
-    var domain = 'http://buylocal.thetyee.ca/letters/#show/';
+    var domain = 'https://develop.buylocal.thetyee.ca/letters/#show/';
     var url = domain + path
     //var url =  domain + path;
 
@@ -253,6 +253,15 @@ App.CardDetailView = Backbone.View.extend({
         console.log(model);
         console.log(model.get('businessName'));
         App.updateMeta(model);
+         if ( model.get('css') && model.get('css-loaded') !== true ) {
+            var css = model.get('css');
+            $('<link>')
+            .appendTo('head')
+            .attr({type : 'text/css', rel : 'stylesheet'})
+            .attr('href', css);
+            model.set("css-loaded", true);
+            console.log('cssnottrue');
+        }
 
     },
 
