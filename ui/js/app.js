@@ -7,6 +7,40 @@
 //= require backbone.js
 //= require backbone.paginator.js
 
+// ===================================================================
+// Utilities
+// ===================================================================
+App.updateMeta = function(model) {
+    var title = model.get('businessName');
+    var path  = model.get('id');
+    // TODO - Sally, move this to a configuration variable somewhere! :-)
+    var domain = 'http://develop.buylocal.thetyee.ca/letter/show/';
+    var url = domain + path;
+    $('title').remove();
+    $('meta[property="og:title"]').remove();
+    $('meta[property="DC.title"]').remove();
+    $('meta[property="description"]').remove();
+    $('meta[property="DC.description"]').remove();
+    $('meta[property="og:description"]').remove();
+    $('meta[property="og:image"]').remove();
+    $('meta[property="og:image:url"]').remove();
+    $('meta[property="og:url"]').remove();
+    $('meta[property="og:type"]').remove();
+    $('meta[property="og:site_name"]').remove();
+    $('meta[property="fb:admins"]').remove();
+    $('meta[property="twitter:image:src"]').remove();
+    
+    $("head").append('<title>' + title + '</title>');
+    $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
+    $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
+    $("head").append('<meta property="og:url" content=" ' + url + '">');
+    $("head").append('<meta property="og:image" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
+    $("head").append('<meta property="twitter:image:src" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
+};
+
+// ===================================================================
+// Businesses
+// ===================================================================
 App.Business = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -64,6 +98,34 @@ App.BusinessesListView = Backbone.View.extend({
     }
 });
 
+App.BusinessDetailView = Backbone.View.extend({
+    el: '#business-detail',
+    events: {
+        "click .show-list": "showList"
+    },
+    initialize: function (options) {
+        // TODO Update the meta when it makes sense to do so...
+    },
+
+    template: _.template( $('#tpl_businessDetailView').html() ),
+    render: function() {
+        this.$el.show();
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+    hide: function() {
+        this.$el.hide();
+    },
+    showList: function(event) {
+        event.preventDefault();
+        App.router.navigate('businesses', { trigger: true } );
+    }
+});
+
+
+// ===================================================================
+// Promotions
+// ===================================================================
 App.Promo = Backbone.Model.extend({
     defaults: {
         "Badge": "",
@@ -99,7 +161,9 @@ App.PromoView = Backbone.View.extend({
     }
 });
 
-
+// ===================================================================
+// Cards / Love letters
+// ===================================================================
 App.Card = Backbone.Model.extend({
     defaults: {
         "businessName": "",
@@ -107,7 +171,6 @@ App.Card = Backbone.Model.extend({
         "businessUrl": "",
         "loveMessage": "",
         "submitterName": ""
-   
     },
     parse: function(response, options) {
         // TODO response parsing is kinda' borked
@@ -132,48 +195,35 @@ App.Card = Backbone.Model.extend({
     },
     urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
-            //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
-            var rawDate = this.get('dateCreated');
-            //Trim string to just what I need
-            rawDate = rawDate.split(' ', 1);
-            //Specify formatting
-            var date = moment(rawDate[0]).format("MMMM D, YYYY");            
-            //put back what I want.
-            this.set('momentDate', date );
+        //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
+        var rawDate = this.get('dateCreated');
+        console.log(rawDate);
+        //Trim string to just what I need
+        rawDate = rawDate.split(' ', 1);
+        //Specify formatting
+        var date = moment(rawDate[0]).format("MMMM D, YYYY");
+        //put back what I want.
+        this.set('momentDate', date );
     }
 });
 
 App.Cards = Backbone.PageableCollection.extend({
     model: App.Card,
+      mode: "infinite",
     url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
         return response.data.letters;
     },
     initialize: function() {
     },
-    // Any `state` or `queryParam` you override in a subclass will be merged with
-    // the defaults in `Backbone.PageableCollection` 's prototype.
     state: {
 
-        // You can use 0-based or 1-based indices, the default is 1-based.
-        // You can set to 0-based by setting ``firstPage`` to 0.
         firstPage: 1,
-
-        // Set this to the initial page index if different from `firstPage`. Can
-        // also be 0-based or 1-based.
         currentPage: 1,
-
-        // Required under server-mode
         totalRecords: 200,
         pageSize: 18
     },
-
-    // You can configure the mapping from a `Backbone.PageableCollection#state`
-    // key to the query string parameters accepted by your server API.
     queryParams: {
-
-        // `Backbone.PageableCollection#queryParams` converts to ruby's
-        // will_paginate keys by default.
         currentPage: "page",
         pageSize: "limit"
     }
@@ -200,28 +250,31 @@ App.CardDetailView = Backbone.View.extend({
     events: {
         "click .show-list": "showList"
     },
-
-    initialize: function () {
-
+    initialize: function (options) {
+        var model = options.model;
+        App.updateMeta(model);
     },
+
     template: _.template( $('#tpl_cardDetailView').html() ),
     render: function() {
         this.$el.show();
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
+
     hide: function() {
         this.$el.hide();
     },
-    showList: function() {
-        App.router.navigate('#', { trigger: true } );
+    showList: function(event) {
+        event.preventDefault();
+        App.router.navigate('letters', { trigger: true } );
     }
 });
 
 
 App.CardsListView = Backbone.View.extend({
     collection: App.cards,
-    el: '#letters',
+    el: '#letters-list',
     events: {
         "click .card": "showCard",
         "click li.next": function() { App.cards.getNextPage(); },
@@ -230,7 +283,7 @@ App.CardsListView = Backbone.View.extend({
         "click li.last": function() { App.cards.getLastPage(); },
     },
     initialize: function () {
-        this.listenTo(this.collection, 'update reset', this.render);
+        this.listenTo(this.collection.fullCollection, 'update reset', this.render);
         this.listenTo(App.promos, 'reset', this.render);
         this.on('render', this.afterRender());
     },
@@ -240,7 +293,7 @@ App.CardsListView = Backbone.View.extend({
         this.el.innerHTML = this.template();
         var target = this.$el.find(".letters");
         var count = 0;
-        this.collection.forEach(function (card, index) {
+        this.collection.fullCollection.forEach(function (card, index) {
             target.append(new App.CardView({
                 model: card
             }).render().el);
@@ -264,39 +317,100 @@ App.CardsListView = Backbone.View.extend({
         // Not used, but useful! :-)
     },
     showCard: function(event) {
+        event.preventDefault();
+        window.scrollTo(0, 0);
         var el = $(event.currentTarget);
         var cardId = el.data("card");
-        App.router.navigate('/show/' + cardId, { trigger: true } );
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
     },
     hide: function() {
         this.$el.hide();
     }
 });
 
-App.router = Backbone.Router.extend({
-    routes: {
-        "":            "showList",
-        "show/:id":    "letterShow"
+App.CardsPreviewListView = Backbone.View.extend({
+    collection: App.cards,
+    el: '#recent-letters',
+    events: {
+        "click .card": "showCard",
+        "click .showFullList": "showList"
     },
-    showList: function() {
-        // For now, only run this function if we're on the /letters page
-        var path = window.location.pathname.replace(/[\\\/][^\\\/]*$/, '');
-        if ( path == '/letters') {
-            console.log('Default route / Card list');
-            App.cardsListView = new App.CardsListView();
-            App.cardsListView.render();
-            if ( App.cardDetailView ) {
-                // Hide it
-                App.cardDetailView.hide();
-            }
-        } else if ( path == '/businesses' ) { 
-            console.log('Default route / Business list');
-            App.businessesListView = new App.BusinessesListView();
-            App.businessesListView.render();
-        } else { return; }
+    initialize: function () {
+        this.listenTo(this.collection, 'update reset', this.render);
+    },
+    template: _.template( $('#tpl_cardPromoListView').html() ),
+    render: function () {
+        this.$el.show();
+        this.el.innerHTML = this.template();
+        var target = this.$el.find(".letters");
+        var preview = this.collection.slice(0,3);
+        preview.forEach(function (card, index) {
+            target.append(new App.CardView({
+                model: card
+            }).render().el);
+        }, this);
+        return this;
+    },
+    showCard: function(event) {
+        event.preventDefault();
+        var el = $(event.currentTarget);
+        window.scrollTo(0, 0);
+        var cardId = el.data("card");
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
+    },
+    showList: function(event) {
+        window.scrollTo(0, 0);
+        event.preventDefault();        
+        App.router.navigate('letters', { trigger: true } );
+    },
+    hide: function() {
+        this.$el.hide();
+    }
+});
+
+// ===================================================================
+// Router
+// ===================================================================
+App.Router = Backbone.Router.extend({
+    // Assume that any pages with cards or businesses showing are Backbone-powered
+    // Static pages: /prizes, /about, etc. are not
+    routes: {
+        "":                   "showFront",
+        "letters":            "showLetters",
+        "businesses":            "showBusinesses",
+        "letter/show/:id":    "letterShow",
+        "business/show/:id":    "businessShow"
+    },
+    showFront: function() {
+        console.log('Front page');
+        // Show only the front page panel
+        $('.panels').hide();
+        $('.panel-front').show();
+        var cardPreview = new App.CardsPreviewListView();
+        cardPreview.render();
+    },
+    showLetters: function() {
+        console.log('Letters list');
+        $('.panels').hide();
+        $('.panel-letters').show();
+        App.cardsListView = new App.CardsListView();
+        App.cardsListView.render();
+        if ( App.cardDetailView ) {
+            // Hide it
+            App.cardDetailView.hide();
+        }
+    },
+    showBusinesses: function() {
+        console.log('Businesses list');
+        $('.panels').hide();
+        $('.panel-businesses').show();
+        App.businessesListView = new App.BusinessesListView();
+        App.businessesListView.render();
     },
     letterShow: function(id) {
         console.log('Card detail');
+        $('.panels').hide();
+        $('.panel-letter').show();
         var card = App.cards.get(id);
         // TODO Fix this silliness
         // If the card is accessed directly
@@ -319,34 +433,14 @@ App.router = Backbone.Router.extend({
             // Hide the list?
             App.cardsListView.hide();
         }
+    },
+    businessShow: function(id) {
+        console.log('Business detail');
+        $('.panels').hide();
+        $('.panel-business').show();
+        var business = App.businesses.findWhere({"businessName": id });
+        console.log(business);
+        App.businessDetailView = new App.BusinessDetailView({ model: business });
+        App.businessDetailView.render();
     }
-});
-
-$(function(){
-    Tabletop.init({ 
-        key: App.promosUrl, 
-        callback: function(data, tabletop) {
-        var promoCards = data.Sheet1.elements;
-        // Randomize the promos
-        promoCards     = _.shuffle(promoCards);
-        // Add all the promos at once to a collection
-        // & fire the reset event, which re-renders the CardsListView
-        App.promos.reset(promoCards);
-        var frontPromoModel = App.promos.shift();
-        var frontPromo = new App.PromoView({ model: frontPromoModel });
-        var frontPromoHTML = frontPromo.render().el;
-        $('#vancity-promo').append( frontPromoHTML );
-        }
-    });
-    App.cards.fetch({
-        "success": function(collection, response, options){
-            App.router = new App.router();
-            Backbone.history.start();
-        },
-        "error": function(error) {
-            // Oh noes!
-
-        }
-    });
-    App.businesses.fetch();
 });
