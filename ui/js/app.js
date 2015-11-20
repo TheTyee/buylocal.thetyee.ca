@@ -348,7 +348,7 @@ App.CardsPreviewListView = Backbone.View.extend({
         App.router.navigate('letter/show/' + cardId, { trigger: true } );
     },
     showList: function(event) {
-        console.log(event);
+        window.scrollTo(0, 0);
         event.preventDefault();        
         App.router.navigate('letters', { trigger: true } );
     },
@@ -425,11 +425,9 @@ App.Router = Backbone.Router.extend({
     },
     businessShow: function(id) {
         console.log('Business detail');
-        //console.log(id);
         $('.panels').hide();
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": '4Cats' });
-        console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     }
