@@ -14,7 +14,7 @@ App.updateMeta = function(model) {
     var title = model.get('businessName');
     var path  = model.get('id');
     // TODO - Sally, move this to a configuration variable somewhere! :-)
-    var domain = 'https://develop.buylocal.thetyee.ca/letters/show/';
+    var domain = 'https://develop.buylocal.thetyee.ca/letter/show/';
     var url = domain + path;
     $('title').remove();
     $('meta[property="og:title"]').remove();
