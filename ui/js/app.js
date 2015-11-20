@@ -430,7 +430,7 @@ App.Router = Backbone.Router.extend({
         console.log('Business detail');
         $('.panels').hide();
         $('.panel-business').show();
-        var business = App.businesses.findWhere({"businessName": '4Cats' });
+        var business = App.businesses.findWhere({"businessName": id });
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     }
