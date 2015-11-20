@@ -378,31 +378,4 @@ App.router = Backbone.Router.extend({
 // Render the app
 // ===================================================================
 
-$(function(){
-    Tabletop.init({ 
-        key: App.promosUrl, 
-        callback: function(data, tabletop) {
-        var promoCards = data.Sheet1.elements;
-        // Randomize the promos
-        promoCards     = _.shuffle(promoCards);
-        // Add all the promos at once to a collection
-        // & fire the reset event, which re-renders the CardsListView
-        App.promos.reset(promoCards);
-        var frontPromoModel = App.promos.shift();
-        var frontPromo = new App.PromoView({ model: frontPromoModel });
-        var frontPromoHTML = frontPromo.render().el;
-        $('#vancity-promo').append( frontPromoHTML );
-        }
-    });
-    App.cards.fetch({
-        "success": function(collection, response, options){
-            App.router = new App.router();
-            Backbone.history.start();
-        },
-        "error": function(error) {
-            // Oh noes!
 
-        }
-    });
-    App.businesses.fetch();
-});
