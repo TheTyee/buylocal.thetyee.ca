@@ -14,7 +14,9 @@ App.updateMeta = function(model) {
     var title = model.get('businessName');
     var path  = model.get('id');
     // TODO - Sally, move this to a configuration variable somewhere! :-)
-    var domain = 'http://develop.buylocal.thetyee.ca/letter/show/';
+    var domain = App.rootUrl + '/letter/show/';
+
+
     var url = domain + path;
     $('title').remove();
     $('meta[property="og:title"]').remove();
@@ -34,9 +36,11 @@ App.updateMeta = function(model) {
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
     $("head").append('<meta property="og:url" content=" ' + url + '">');
-    $("head").append('<meta property="og:image" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
-    $("head").append('<meta property="twitter:image:src" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
+    $("head").append('<meta property="og:image" content="' + App.rootUrl + '/ui/img/share-letter.png">');
+    $("head").append('<meta property="twitter:image:src" content="' + App.rootUrl + '/ui/img/share-letter.png">');
 };
+
+    console.log(App);
 
 // ===================================================================
 // Businesses
@@ -197,7 +201,6 @@ App.Card = Backbone.Model.extend({
     initialize: function(){
         //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
         var rawDate = this.get('dateCreated');
-        console.log(rawDate);
         //Trim string to just what I need
         rawDate = rawDate.split(' ', 1);
         //Specify formatting
