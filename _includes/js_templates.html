@@ -1,3 +1,13 @@
+<!--MUSTACHE TEMPLATE -->
+<script id="template" type="x-tmpl-mustache">
+    {% raw %}
+        <dl>
+        <p>{{{content}}}</p>
+        <h2 class="heading">{{{hed}}}</h2>
+        </dl>
+    {% endraw %}
+</script>
+
 <script type="text/template" id="tpl_businessView">
     <li><%= businessName %>, <%= businessLocation %></li>
 </script>
@@ -6,17 +16,28 @@
 
     </ul>
 </script>
+<script type="text/template" id="tpl_businessDetailView">
+    <article data-business='<%= businessName %>' class='business-detail'>
+        <header>
+        </header>
+        <p class="businessName"><%= businessName %>, <%= businessLocation %></p>
+        <footer>
+        </footer>
+    </article>
+</script>
+
+
 <script type="text/template" id="tpl_cardView">
     <article data-card='<%= id %>' class='card'>
     <header>
-        <a href='https://twitter.com/share?url={{ site.url }}/letters/#show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+        <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
          <div class="fb-share-button" 
-            data-href="{{ site.url }}/letters/#show/<%= id %>" 
+            data-href="{{ site.url }}/letters/show/<%= id %>" 
             data-layout="button">
         </div>
-        <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/#show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
+        <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
 
-        <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+        <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
     </header>
     <p class="businessName">Dear <%= businessName %>,</p>
     <p class="loveMessage"><%= loveMessage %></p>
@@ -24,7 +45,7 @@
     <footer>
         <p class="dateCreated"><%= momentDate %></p>
         <p class="permalink">
-            <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
+            <small><a class="showCard" data-card="<%= id %>"href='#'>Permalink</a></small>
         </p>
     </footer>
     </article>
@@ -33,13 +54,13 @@
     <article data-card='<%= id %>' class='card-detail'>
         <header>
 
-            <a href='https://twitter.com/share?url={{ site.url }}/letters/#show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
+            <a href='https://twitter.com/share?url={{ site.url }}/letters/show/<%= id %>&text=Thank you, <%= businessName %>!&via=TheTyee&hashtags=bcbuylocal ' target='_blank'><i class='fa fa-twitter-square fa-2x'></i></a>
          <div class="fb-share-button" 
-            data-href="{{ site.url }}/letters/#show/<%= id %>" 
+            data-href="{{ site.url }}/letters/show/<%= id %>" 
             data-layout="button">
         </div>
-        <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/#show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
-            <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/#show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
+        <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letters/show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
+            <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letters/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
         </header>
         <p class="businessName">Dear <%= businessName %>,</p>
         <p class="loveMessage"><%= loveMessage %></p>
@@ -47,7 +68,7 @@
         <footer>
             <p class="dateCreated"><%= momentDate %></p>
             <p class="permalink">
-                <small><a href='/letters/#show/<%= id %>'>Permalink</a></small>
+                <small><a href='/letters/show/<%= id %>'>Permalink</a></small>
             </p>
             <a class='show-list button' href='#'>Back</a>
         </footer>
@@ -58,10 +79,7 @@
     <div class='letters'></div>
     <br clear="all" />
     <ul id="pagination">
-        <li class="first"><a href="#">First</a></li>
-        <li class="previous"><a href="#">Previous</a></li>
-        <li class="next"><a href="#">Next</a></li>
-        <li class="last"><a href="#">Last</a></li>
+        <li class="next"><a>More</a></li>
     </ul>
 </script>
 <script id="tpl_promoView" type="text/template">
@@ -81,4 +99,12 @@
             </div>
         </article>
     </section>
+</script>
+<script type="text/template" id="tpl_cardPromoListView">
+    <section class="letters"></div>
+    </section>
+    <br clear="all" />
+    <ul id="pagination">
+        <li><a class="button showFullList" href="">Read more letters</a></li>
+    </ul>
 </script>
