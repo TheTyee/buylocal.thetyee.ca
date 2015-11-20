@@ -9,14 +9,15 @@
 </script>
 
 <script type="text/template" id="tpl_businessView">
-    <li><%= businessName %>, <%= businessLocation %></li>
+    <li><strong><%= businessName %></strong>, <%= businessLocation %></li>
 </script>
+
 <script type="text/template" id="tpl_businessListView">
     <h2 class="heading">Businesses</h2>
     <ul class="businesses">
-
     </ul>
 </script>
+
 <script type="text/template" id="tpl_businessDetailView">
     <article data-business='<%= businessName %>' class='business-detail'>
         <header>
