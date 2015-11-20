@@ -312,7 +312,7 @@ App.CardsListView = Backbone.View.extend({
     showCard: function(event) {
         var el = $(event.currentTarget);
         var cardId = el.data("card");
-        App.router.navigate('/!/show/' + cardId, { trigger: true } );
+        App.router.navigate('/show/' + cardId, { trigger: true } );
     },
     hide: function() {
         this.$el.hide();
@@ -325,7 +325,7 @@ App.CardsListView = Backbone.View.extend({
 
 
 
-App.router = Backbone.Router.extend({
+App.Router = Backbone.Router.extend({
     routes: {
         "":            "showList",
         "!/show/:id":    "letterShow"
