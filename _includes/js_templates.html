@@ -51,10 +51,8 @@
 <script type="text/template" id="tpl_cardDetailView">
     <article data-card='<%= id %>' class='card-detail'>
         <header>
-
-
             <a href="https://twitter.com/share?url={{ site.url }}/letter/show/<%= id %>&text=Thank you, <%= encodeURIComponent(businessName) %>!&via=TheTyee&hashtags=bcbuylocal" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-        <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letter/show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
+            <a class="facebook-share" href="https://facebook.com/sharer.php?u={{ site.url }}/letter/show/<%= id %>" rel="nofollow" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
             <a class='email-share' target='_blank' href='mailto:?subject=A Great Local Letter!&body=I thought you might like to see this! Read it at {{ site.url }}/letter/show/<%= id %>'><i class='fa fa-envelope fa-2x'></i></a>
         </header>
         <p class="businessName">Dear <%= businessName %>,</p>
@@ -62,8 +60,10 @@
         <p class="submitterName">- <em><%= submitterName %></em></p>
         <footer>
             <p class="dateCreated"><%= momentDate %></p>
-            <p class="permalink">
-                <small><a href='/letters/show/<%= id %>'>Permalink</a></small>
+            <p>
+                <small>
+                    <a class="permalink" href="#">Permalink</a>
+                </small>
             </p>
             <a class='show-list button' href='#'>Back</a>
         </footer>

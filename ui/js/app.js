@@ -249,7 +249,8 @@ App.CardView = Backbone.View.extend({
 App.CardDetailView = Backbone.View.extend({
     el: '#letter',
     events: {
-        "click .show-list": "showList"
+        "click .show-list": "showList",
+        "click .permalink": "copyCard"
     },
     initialize: function (options) {
         var model = options.model;
@@ -269,7 +270,15 @@ App.CardDetailView = Backbone.View.extend({
     showList: function(event) {
         event.preventDefault();
         App.router.navigate('letters', { trigger: true } );
-    }
+    },
+    copyCard: function(){
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var el = $(event.currentTarget);
+        var cardId = el.data("card");
+        var currentUrl = Backbone.history.fragment;
+        App.router.navigate(currentUrl, { trigger: true } );
+    },
 });
 
 
@@ -444,6 +453,7 @@ App.Router = Backbone.Router.extend({
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     },
+
     trackPageView: function() {
         var url = Backbone.history.getFragment();
         // Add a slash if neccesary
