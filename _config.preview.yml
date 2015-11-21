@@ -1,0 +1,10 @@
+mode: 'preview'
+# These overwrite configurations options from _config.yml
+# This is for *remote* preview
+url: "http://preview.buylocal.thetyee.ca"
+api_url: 'http://preview.buylocal.thetyee.ca'
+
+assets:
+  debug: true
+  cachebust: none
+  cache: true
