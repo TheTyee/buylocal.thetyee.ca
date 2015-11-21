@@ -73,7 +73,7 @@
                     "success": function(collection, response, options){
                         // Start routing now...
                         App.router = new App.Router();
-                        {% if site.mode != 'development' %}
+                        {% if site.mode != 'local' %}
                             Backbone.history.start({ pushState: true });
                         {% else %}
                             Backbone.history.start();
