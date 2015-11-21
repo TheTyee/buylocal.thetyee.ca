@@ -446,4 +446,16 @@ App.Router = Backbone.Router.extend({
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     }
+    trackPageView: function() {
+        var url = Backbone.history.getFragment();
+        // Add a slash if neccesary
+        if (!/^\//.test(url)) url = '/' + url;
+        // Record page view
+        //console.log('trackPageView');
+        //console.log(url);
+        ga('send', {
+            'hitType': 'pageview',
+            'page': url
+        });
+    }
 });
