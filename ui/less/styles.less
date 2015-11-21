@@ -164,11 +164,13 @@ HOME
   font-family: "franklin-gothic-urw-cond", sans-serif;
   text-transform: none;
   transition: background .3s ease; 
+  
 }
-  .button:hover {
-    background: #bc1bcb;
-    color: white;
-    border: none; }
+.button:hover, .button:visited {
+  background: #bc1bcb;
+  color: white;
+  border: none; 
+}
 
 
 /* ==========================================================================
@@ -242,7 +244,8 @@ LETTERS
 #pagination {
   overflow: hidden;
   li{
-    a{
+    a:visited{
+      color: #fff;
 
     }
 

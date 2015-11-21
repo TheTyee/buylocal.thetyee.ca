@@ -14,7 +14,7 @@ App.updateMeta = function(model) {
     var title = model.get('businessName');
     var path  = model.get('id');
     // TODO - Sally, move this to a configuration variable somewhere! :-)
-    var domain = 'http://preview.buylocal.thetyee.ca/letter/show/';
+    var domain = App.rootUrl + '/letter/show/';
     var url = domain + path;
     $('title').remove();
     $('meta[property="og:title"]').remove();
@@ -34,9 +34,10 @@ App.updateMeta = function(model) {
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
     $("head").append('<meta property="og:url" content=" ' + url + '">');
-    $("head").append('<meta property="og:image" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
-    $("head").append('<meta property="twitter:image:src" content="http://develop.buylocal.thetyee.ca/ui/img/share-letter.png">');
+    $("head").append('<meta property="og:image" content="' + App.rootUrl + '/ui/img/share-letter.png">');
+    $("head").append('<meta property="twitter:image:src" content="' + App.rootUrl + '/ui/img/share-letter.png">');
 };
+
 
 // ===================================================================
 // Businesses
@@ -197,7 +198,6 @@ App.Card = Backbone.Model.extend({
     initialize: function(){
         //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
         var rawDate = this.get('dateCreated');
-        console.log(rawDate);
         //Trim string to just what I need
         rawDate = rawDate.split(' ', 1);
         //Specify formatting
@@ -205,6 +205,7 @@ App.Card = Backbone.Model.extend({
         //put back what I want.
         this.set('momentDate', date );
     }
+
 });
 
 App.Cards = Backbone.PageableCollection.extend({
@@ -439,8 +440,20 @@ App.Router = Backbone.Router.extend({
         $('.panels').hide();
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
-        console.log(business);
+       // console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
+    },
+    trackPageView: function() {
+        var url = Backbone.history.getFragment();
+        // Add a slash if neccesary
+        if (!/^\//.test(url)) url = '/' + url;
+        // Record page view
+        //console.log('trackPageView');
+        //console.log(url);
+        ga('send', {
+            'hitType': 'pageview',
+            'page': url
+        });
     }
 });
