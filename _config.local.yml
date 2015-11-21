@@ -1,0 +1,13 @@
+mode: 'development'
+# These overwrite configurations options from _config.yml
+url: "http://localhost:4000"
+api_url: 'http://develop.buylocal.thetyee.ca'
+
+assets:
+  debug: true
+  cachebust: none
+  cache: true
+
+# Tabletop
+#tabletop:
+    #promos: 'https://docs.google.com/spreadsheets/d/1bpwVmVv4J7ZpXi0BZeG8sH93jhHFD6CCTxtzmin3SeA/pubhtml'
