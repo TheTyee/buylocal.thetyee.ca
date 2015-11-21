@@ -445,7 +445,7 @@ App.Router = Backbone.Router.extend({
        // console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
-    }
+    },
     trackPageView: function() {
         var url = Backbone.history.getFragment();
         // Add a slash if neccesary
