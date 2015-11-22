@@ -184,7 +184,7 @@ App.Card = Backbone.Model.extend({
             d = response.data.letters;
         }
         return {
-            "id": d.entry_id,
+            "id": d.id,
             "businessName": d.business_name,
             "businessLocation": d.business_city,
             "businessUrl": d.business_url,
