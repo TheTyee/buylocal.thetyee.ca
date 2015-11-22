@@ -33,6 +33,9 @@ social:
     twitter:
     gplus:
 
+# Wufoo
+wufoo: 'm575vry0pmy7ns'
+
 # GSheets
 gdrive: 
   sheet: "Prizes"

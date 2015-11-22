@@ -1,10 +1,10 @@
-<div id="wufoo-m575vry0pmy7ns">
-Fill out my <a href="https://thetyee.wufoo.com/forms/m575vry0pmy7ns">online form</a>.
+<div id="wufoo-{{ site.wufoo }}">
+Fill out my <a href="https://thetyee.wufoo.com/forms/{{ site.wufoo }}">online form</a>.
 </div>
-<script type="text/javascript">var m575vry0pmy7ns;(function(d, t) {
+<script type="text/javascript">var {{ site.wufoo }};(function(d, t) {
 var s = d.createElement(t), options = {
 'userName':'thetyee',
-'formHash':'m575vry0pmy7ns',
+'formHash':'{{ site.wufoo }}',
 'autoResize':true,
 'height':'731',
 'async':true,
@@ -14,6 +14,6 @@ var s = d.createElement(t), options = {
 s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
 s.onload = s.onreadystatechange = function() {
 var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-try { m575vry0pmy7ns = new WufooForm();m575vry0pmy7ns.initialize(options);m575vry0pmy7ns.display(); } catch (e) {}};
+try { {{ site.wufoo }} = new WufooForm();{{ site.wufoo }}.initialize(options);{{ site.wufoo }}.display(); } catch (e) {}};
 var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
 })(document, 'script');</script>
