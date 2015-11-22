@@ -4,6 +4,9 @@ mode: 'development'
 url: "http://develop.buylocal.thetyee.ca"
 api_url: 'http://develop.buylocal.thetyee.ca'
 
+# Different form for development
+wufoo: 'mnucytj1hgl1hy'
+
 assets:
   debug: true
   cachebust: none
