@@ -1,0 +1,15 @@
+mode: 'local'
+# Local development (both jekyll and API)
+# These overwrite configurations options from _config.yml
+url: "http://localhost:4000"
+
+# If you're doing local dev, but don't have the API
+# service running locally, you'll need to change this:
+api_url: 'http://localhost:3000'
+
+wufoo: 'mnucytj1hgl1hy'
+
+assets:
+  debug: true
+  cachebust: none
+  cache: true

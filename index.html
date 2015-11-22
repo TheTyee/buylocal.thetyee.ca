@@ -19,56 +19,71 @@ layout: default
     }
   });
 </script>
-<!--MUSTACHE TEMPLATE -->
-<script id="template" type="x-tmpl-mustache">
-    {% raw %}
-        <dl>
-        <p>{{{content}}}</p>
-        <h2 class="heading">{{{hed}}}</h2>
-        </dl>
-    {% endraw %}
-</script>
 
 <!--PAGE MARKUP-->
-<section class="intro-content">
-    <article>
-        <div class="main">
-            <div id="home-copy"></div>
-            {% include form.html %}
-        </div>
-        <div class="sidebar">
-            {% include sidebar.html %}
-        </div>
-    </article>
-</section>
+<div class="panels panel-loading container">
+    <p>Loading...</p>
+</div>
+<div class="panels panel-front" style="display:none;">
+    <section class="intro-content">
+        <article>
+            <div class="main">
+                <div id="home-copy"></div>
+                {% include form.html %}
+            </div>
+            <div class="sidebar">
+                {% include sidebar.html %}
+            </div>
+        </article>
+    </section>
 
-
-<section>
-    <div class="row">
-        <h2 class="heading">Recent letters</h2>
-        <div id="recent-letters">
-           <div class="index-letter-0"></div>
-           <div class="index-letter-1"></div>
-           <div class="index-letter-2"></div>
+    <section>
+        <div class="row">
+            <h2 class="heading">Recent letters</h2>
+            <div id="recent-letters">
+            </div>
         </div>
+    </section>
+
+    <div id="vancity-promo">
     </div>
-<a class="button" href="/letters">Read more letters</a>
-</section>
+</div>
 
-<section>
-    <article class="vancity-content">
-        <script id="partner_template" type="x-tmpl-mustache">
-        {% raw %}
-        <dl>    
-        <img src="{{site.url}}/ui/img/{{{Image}}}"/>
-        <a href="{{{Link}}}">{{Business}}</a>
-        <a href="http://www.twitter.com/{{{Twitter}}}">@{{{Twitter}}}</a>
-        <p>{{{Text}}}</p>
-        <a href="{{{Link}}}">Learn more</a>
-        </dl>
-        {% endraw %}
-        </script>
-        <div id="partners" class="partner-0"></div>
+<div class="panels panel-letters" style="display:none;">
+    <div class="container">
+            <a class="button" href="/">Write your own card by December 14th &amp; enter to win.</a>
+            <section class="business-cards">
+                    <article class="cards">
+                            <div id="letters-list">
+                            </div>
+                    </article>
+            </section>
+    </div>
+</div>
 
-    </article>
-</section>
+<div class="panels panel-letter" style="display:none;">
+    <div class="container">
+            <section class="business-cards">
+                    <article class="cards">
+                            <div id="letter"></div>
+                    </article>
+            </section>
+    </div>
+</div>
+
+<div class="panels panel-businesses" style="display:none;">
+    <section>
+            <article id="business-listing">
+            </article>
+    </section>
+</div>
+
+<div class="panels panel-business" style="display:none;">
+    <div class="container">
+            <section>
+                    <article class="business">
+                            <div id="business-detail"></div>
+                    </article>
+            </section>
+    </div>
+</div>

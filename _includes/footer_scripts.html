@@ -1,46 +1,92 @@
 {% javascript instafeed.min.js %}
 <script>
-window.App = {};
-App.apiUrl = '{{ site.api_url }}';
-App.promosUrl = '{{ site.tabletop.promos }}';
+    window.App = {};
+    App.apiUrl = '{{ site.api_url }}';
+    App.rootUrl = '{{ site.url }}'; 
+    App.promosUrl = '{{ site.tabletop.promos }}';
 </script>
+{% include js_templates.html %}
 {% javascript app.js %}
-
 
 <script type="text/javascript">
     var userFeed = new Instafeed({
         get: 'tagged',
-        tagName: 'BCBuyLocal',
+        tagName: 'tyeecontest',
         userId: parseInt(417159344),
         accessToken: '333678892.9897311.ce85a47091c34fd1af4ac9c1d6fb8e19',
         sortBy: 'random',
         limit: 4,
         error: function(data){
-          $('.instagram-widget').hide();
+            $('.instagram-widget').hide();
         },
         success: function(data){
-         
+
         }
-   });
-   userFeed.run();
+    });
+    userFeed.run();
 </script>
+
+
 
 {% if site.mode == 'development-w-grunt' %}
     <script src="//localhost:35729/livereload.js"></script>
     <script type='text/javascript'>//<![CDATA[
-    ;document.write("<script defer src='//HOST:3000/socket.io/socket.io.js'><\/script><script defer src='//HOST:3001/client/browser-sync-client.0.9.1.js'><\/script>".replace(/HOST/g, location.hostname));
-    //]]></script>
-  {% else if site.mode == 'development' %}
-
-  {% else %}
-    <script>
+        ;document.write("<script defer src='//HOST:3000/socket.io/socket.io.js'><\/script><script defer src='//HOST:3001/client/browser-sync-client.0.9.1.js'><\/script>".replace(/HOST/g, location.hostname));
+        //]]></script>
+    {% else if site.mode == 'development' %}
+    {% else %}
+     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', '{{ site.analytics.ga_tracking_id }}', 'auto');
+      ga('create', 'UA-169022-11', 'auto');
       ga('send', 'pageview');
-
     </script>
 {% endif %}
+
+
+
+<script>
+    $(function(){
+        Tabletop.init({ 
+            key: App.promosUrl, 
+            callback: function(data, tabletop) {
+                var promoCards = data.Sheet1.elements;
+                // Randomize the promos
+                promoCards     = _.shuffle(promoCards);
+                // Add all the promos at once to a collection
+                // & fire the reset event, which re-renders the CardsListView
+                App.promos.reset(promoCards);
+                var frontPromoModel = App.promos.shift();
+                var frontPromo = new App.PromoView({ model: frontPromoModel });
+                var frontPromoHTML = frontPromo.render().el;
+                $('#vancity-promo').append( frontPromoHTML );
+            }
+        });
+        // Fetch the cards/letters
+        App.cards.fetch({
+            "success": function(collection, response, options){
+                // Fetch the businesses
+                App.businesses.fetch({
+                    "success": function(collection, response, options){
+                        // Start routing now...
+                        App.router = new App.Router();
+                        {% if site.mode != 'local' %}
+                            Backbone.history.start({ pushState: true });
+                        {% else %}
+                            Backbone.history.start();
+                        {% endif %}
+                    },
+                    "error": function(error) {
+                        // Oh noes!
+                    }
+                });
+            },
+            "error": function(error) {
+                // Oh noes!
+            }
+        });
+    });
+</script>

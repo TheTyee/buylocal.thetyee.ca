@@ -1,0 +1,5 @@
+mode: 'production'
+# These overwrite configurations options from _config.yml
+# This is for *remote* production (live!)
+url: "http://buylocal.thetyee.ca"
+api_url: 'http://buylocal.thetyee.ca'

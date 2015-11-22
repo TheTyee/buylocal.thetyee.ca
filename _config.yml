@@ -1,10 +1,8 @@
 # Project settings - General
-version: 0.0.1
+version: 'v1.0.0' 
 title: "Buy Local"
 description: "Send Holiday Greetings to your favourite local biz. (And win!)"
 baseurl: ""
-url: "http://buylocal.thetyee.ca"
-api_url: 'http://develop.buylocal.thetyee.ca'
 
 # Project settings - Analytics
 analytics:
@@ -35,11 +33,13 @@ social:
     twitter:
     gplus:
 
+# Wufoo
+wufoo: 'm575vry0pmy7ns'
+
 # GSheets
 gdrive: 
   sheet: "Prizes"
   cache_period: 1 minute
-  gdrive: export GDRIVE=858028269662-nnpla9bm2499tomahoutkg4beenu91ja.apps.googleusercontent.com:_cZxmQwr5n1r0ebt5mpO7t9e:1/Vr1AMGx6l4ANhS2bysNgIyso-hMCw4ET229qsExyYBRIgOrJDtdun6zK6XiATCKT
 
 # Tabletop
 tabletop:

@@ -1,8 +1,8 @@
-mode: 'development'
+mode: 'preview'
 # These overwrite configurations options from _config.yml
-# This is for *remote* development
-url: "http://develop.buylocal.thetyee.ca"
-api_url: 'http://develop.buylocal.thetyee.ca'
+# This is for *remote* preview
+url: "http://preview.buylocal.thetyee.ca"
+api_url: 'http://preview.buylocal.thetyee.ca'
 
 # Different form for development
 wufoo: 'mnucytj1hgl1hy'
