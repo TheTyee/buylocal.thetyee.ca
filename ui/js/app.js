@@ -428,9 +428,19 @@ App.Router = Backbone.Router.extend({
             card = new App.Card({ "id": id });
             // Which is async, thus we need to render after we have the data
             card.fetch({
-                "success": function() {
+                "success": function(model, response, options) {
                     App.cardDetailView = new App.CardDetailView({ model: card });
                     App.cardDetailView.render();
+                },
+                "error": function(model, response, options) {
+                    // TODO Work around slow webhooks from Wufoo
+                    // Could use the ?success=true to know that this card *should* be there
+                    // Or could use a fragment, e.g., /letter/show/:id/success
+                    if ( response.status === 422 ) {
+                        // If the card isn't there right now
+                        // it might be in a moment, so show a message to the user
+                        console.log('Got a 422');
+                    }
                 }
             });
         } else { // The card *is* in the collection, so just render the view
