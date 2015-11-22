@@ -31,6 +31,7 @@ LAYOUT :: SIDEBAR
 
 #instafeed a {
   display: inline-block;
+  padding: 8px;
 }
 
 .prize:nth-child(2n) { clear: both; }
@@ -38,6 +39,9 @@ LAYOUT :: SIDEBAR
 
 .prize {
   .make-md-column(6); 
+  p{
+    padding: 5px 0px;
+  }
 }
 
 
@@ -45,9 +49,8 @@ LAYOUT :: SIDEBAR
 LAYOUT :: BUSINESS CARDS
 ========================================================================== */ 
 
-.letters div {
+.letters div, #recent-letters div {
    .make-md-column(4);
-
 
    article {
       padding: 10px!important;
@@ -79,7 +82,7 @@ LAYOUT :: BUSINESS CARDS
 }
 #pagination {
   li {
-    .make-md-column(3);
+    .make-md-column(12);
   } 
 }
  /* ==========================================================================
@@ -99,4 +102,21 @@ LAYOUT :: PAGE :: PRIZES
     line-height: 24px;
   }
 
+}
+
+ /* ==========================================================================
+LAYOUT :: PAGE :: PROMO CARDS
+========================================================================== */ 
+.vancity-content {
+  .vancity-left, .vancity-right {
+    .vancity-photo {
+      .make-md-column(12);
+      position: relative;
+    }
+    .loco-tag {
+      z-index: 9999;
+    }
+    position: relative;
+    .make-md-column(6);
+  }
 }

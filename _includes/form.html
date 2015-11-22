@@ -1,19 +1,20 @@
-<div id="wufoo-z1wu3fc30hqoqic">
-Fill out my <a href="https://thetyee.wufoo.com/forms/z1wu3fc30hqoqic">online form</a>.
+<div id="wufoo-{{ site.wufoo }}">
+Fill out my <a href="https://thetyee.wufoo.com/forms/{{ site.wufoo }}">online form</a>.
 </div>
-<script type="text/javascript">var z1wu3fc30hqoqic;(function(d, t) {
+<script type="text/javascript">var {{ site.wufoo }};(function(d, t) {
 var s = d.createElement(t), options = {
+'defaultValues':'field227={{ site.url }}',
 'userName':'thetyee',
-'formHash':'z1wu3fc30hqoqic',
+'formHash':'{{ site.wufoo }}',
 'autoResize':true,
-'height':'1301',
+'height':'731',
 'async':true,
 'host':'wufoo.com',
-'header':'show',
-'ssl':true};
+'header':'hide',
+'ssl':false};
 s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
 s.onload = s.onreadystatechange = function() {
 var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-try { z1wu3fc30hqoqic = new WufooForm();z1wu3fc30hqoqic.initialize(options);z1wu3fc30hqoqic.display(); } catch (e) {}};
+try { {{ site.wufoo }} = new WufooForm();{{ site.wufoo }}.initialize(options);{{ site.wufoo }}.display(); } catch (e) {}};
 var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
 })(document, 'script');</script>
