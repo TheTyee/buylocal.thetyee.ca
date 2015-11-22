@@ -183,6 +183,12 @@ App.Card = Backbone.Model.extend({
         } else {
             d = response.data.letters;
         }
+        //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
+        var rawDate = d.date_created;
+        //Trim string to just what I need
+        rawDate = rawDate.split(' ', 1);
+        //Specify formatting
+        var momentDate = moment(rawDate[0]).format("MMMM D, YYYY");
         return {
             "id": d.id,
             "businessName": d.business_name,
@@ -191,19 +197,11 @@ App.Card = Backbone.Model.extend({
             "dateCreated": d.date_created,
             "loveMessage": d.letter_text,
             "submitterName": d.first_name,
-            "momentDate": ''
+            "momentDate": momentDate
         };
     },
     urlRoot: App.apiUrl + '/api/v1/letters',
     initialize: function(){
-        //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
-        var rawDate = this.get('dateCreated');
-        //Trim string to just what I need
-        rawDate = rawDate.split(' ', 1);
-        //Specify formatting
-        var date = moment(rawDate[0]).format("MMMM D, YYYY");
-        //put back what I want.
-        this.set('momentDate', date );
     }
 
 });
