@@ -419,7 +419,7 @@ App.Router = Backbone.Router.extend({
         "":                   "showFront",
         "letters":            "showLetters",
         "businesses":            "showBusinesses",
-        "letter/show/:id/(:mode)":    "letterShow",
+        "letter/show/:id(/:mode)":    "letterShow",
         "business/show/:id":    "businessShow"
     },
     showFront: function() {
