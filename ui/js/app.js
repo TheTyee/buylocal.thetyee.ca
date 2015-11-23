@@ -425,6 +425,9 @@ App.Router = Backbone.Router.extend({
     showFront: function() {
         console.log('Front page');
         // Show only the front page panel
+        //get user agent on the front page for IE specific styles
+        var doc = document.documentElement;
+        doc.setAttribute('data-useragent', navigator.userAgent);
         $('.panels').hide();
         $('.panel-front').show();
         var cardPreview = new App.CardsPreviewListView();
