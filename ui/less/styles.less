@@ -253,15 +253,15 @@ LETTERS
 }
 
 
-//IE
+//Hacks that make the Wufoo form work across browsers
 
 html[data-useragent*='MSIE 10.0'] iframe, html[data-useragent*='MSIE 9.0'] iframe, html[data-useragent*='Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv 11.0) like Gecko'] iframe{
-    min-height: 1350px;
+    min-height: 1250px;
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
    iframe {
-     min-height: 1350px;
+     min-height: 1250px;
    }
 
    #instafeed a{
@@ -269,5 +269,11 @@ html[data-useragent*='MSIE 10.0'] iframe, html[data-useragent*='MSIE 9.0'] ifram
       width: 50%;
       clear:none;
       float: left;
+   }
+}
+
+@-moz-document url-prefix() { 
+   iframe {
+     min-height: 1250px;
    }
 }
