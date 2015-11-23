@@ -13,7 +13,6 @@
 App.updateMeta = function(model) {
     var title = model.get('businessName');
     var path  = model.get('id');
-    // TODO - Sally, move this to a configuration variable somewhere! :-)
     var domain = App.rootUrl + '/letter/show/';
     var url = domain + path;
     $('title').remove();
@@ -174,8 +173,6 @@ App.Card = Backbone.Model.extend({
         "submitterName": ""
     },
     parse: function(response, options) {
-        // TODO response parsing is kinda' borked
-        // and it would be good to fix it.
         var d;
 
         if (        _.isUndefined(response.data) ) {
@@ -185,7 +182,7 @@ App.Card = Backbone.Model.extend({
         }
         //Date delivered is not ISO time and therefore compatible with moment. Set it so we can format it.
         var rawDate = d.date_created;
-        //Trim string to just what I need
+        //Trim string to just what is needed
         rawDate = rawDate.split(' ', 1);
         //Specify formatting
         var momentDate = moment(rawDate[0]).format("MMMM D, YYYY");
@@ -305,7 +302,6 @@ App.CardDetailErrorView = Backbone.View.extend({
         event.preventDefault();
         window.scrollTo(0, 0);
         var currentUrl = Backbone.history.fragment;
-        console.log(currentUrl);
         App.router.navigate(currentUrl, { trigger: true } );
     },
 });
@@ -453,9 +449,6 @@ App.Router = Backbone.Router.extend({
         App.businessesListView.render();
     },
     letterShow: function(id, mode) {
-        console.log(id);
-        console.log(mode);
-
         console.log('Card detail');
         $('.panels').hide();
         $('.panel-letter').show();
