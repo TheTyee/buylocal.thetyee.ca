@@ -411,8 +411,11 @@ App.CardsPreviewListView = Backbone.View.extend({
 // ===================================================================
 App.Router = Backbone.Router.extend({
     initialize: function() { 
-        // Track every route and call trackPage
-        this.bind('route', this.trackPageView);
+        // If running in production
+        // track every route and call trackPage
+        if ( App.siteMode === 'production' ) {
+            this.bind('route', this.trackPageView);
+        }
     },
     // Assume that any pages with cards or businesses showing are Backbone-powered
     // Static pages: /prizes, /about, etc. are not
