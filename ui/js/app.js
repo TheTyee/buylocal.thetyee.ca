@@ -423,7 +423,7 @@ App.Router = Backbone.Router.extend({
         "business/show/:id":    "businessShow"
     },
     showFront: function() {
-        console.log('Front page');
+        //console.log('Front page');
         // Show only the front page panel
         //get user agent on the front page for IE specific styles
         var doc = document.documentElement;
@@ -434,7 +434,7 @@ App.Router = Backbone.Router.extend({
         cardPreview.render();
     },
     showLetters: function() {
-        console.log('Letters list');
+       // console.log('Letters list');
         $('.panels').hide();
         $('.panel-letters').show();
         App.cardsListView = new App.CardsListView();
@@ -445,14 +445,14 @@ App.Router = Backbone.Router.extend({
         }
     },
     showBusinesses: function() {
-        console.log('Businesses list');
+        //console.log('Businesses list');
         $('.panels').hide();
         $('.panel-businesses').show();
         App.businessesListView = new App.BusinessesListView();
         App.businessesListView.render();
     },
     letterShow: function(id, mode) {
-        console.log('Card detail');
+        //console.log('Card detail');
         $('.panels').hide();
         $('.panel-letter').show();
         var card = App.cards.get(id);
@@ -487,7 +487,7 @@ App.Router = Backbone.Router.extend({
         }
     },
     businessShow: function(id) {
-        console.log('Business detail');
+       // console.log('Business detail');
         $('.panels').hide();
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
