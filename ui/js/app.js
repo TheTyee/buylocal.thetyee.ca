@@ -29,7 +29,7 @@ App.updateMeta = function(model) {
     $('meta[property="og:site_name"]').remove();
     $('meta[property="fb:admins"]').remove();
     $('meta[property="twitter:image:src"]').remove();
-    
+
     $("head").append('<title>' + title + '</title>');
     $("head").append('<meta property="og:title" content="Check out my holiday greeting to ' + title + '!">');
     $("head").append('<meta property="og:sitename" content="Thanks ' + title + '!">');
@@ -208,7 +208,7 @@ App.Card = Backbone.Model.extend({
 
 App.Cards = Backbone.PageableCollection.extend({
     model: App.Card,
-      mode: "infinite",
+    mode: "infinite",
     url: App.apiUrl + '/api/v1/letters',
     parse: function(response, options) {
         return response.data.letters;
@@ -279,6 +279,36 @@ App.CardDetailView = Backbone.View.extend({
     },
 });
 
+
+App.CardDetailErrorView = Backbone.View.extend({
+    el: '#letter',
+    events: {
+        "click .show-list": "showList",
+        "click .permalink": "copyCard"
+    },
+    initialize: function (options) {
+    },
+    template: _.template( $('#tpl_cardDetailErrorView').html() ),
+    render: function() {
+        this.$el.show();
+        this.$el.html(this.template());
+        return this;
+    },
+    hide: function() {
+        this.$el.hide();
+    },
+    showList: function(event) {
+        event.preventDefault();
+        App.router.navigate('letters', { trigger: true } );
+    },
+    copyCard: function(){
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var currentUrl = Backbone.history.fragment;
+        console.log(currentUrl);
+        App.router.navigate(currentUrl, { trigger: true } );
+    },
+});
 
 App.CardsListView = Backbone.View.extend({
     collection: App.cards,
@@ -380,13 +410,17 @@ App.CardsPreviewListView = Backbone.View.extend({
 // Router
 // ===================================================================
 App.Router = Backbone.Router.extend({
+    initialize: function() { 
+        // Track every route and call trackPage
+        this.bind('route', this.trackPageView);
+    },
     // Assume that any pages with cards or businesses showing are Backbone-powered
     // Static pages: /prizes, /about, etc. are not
     routes: {
         "":                   "showFront",
         "letters":            "showLetters",
         "businesses":            "showBusinesses",
-        "letter/show/:id":    "letterShow",
+        "letter/show/:id/(:mode)":    "letterShow",
         "business/show/:id":    "businessShow"
     },
     showFront: function() {
@@ -415,7 +449,10 @@ App.Router = Backbone.Router.extend({
         App.businessesListView = new App.BusinessesListView();
         App.businessesListView.render();
     },
-    letterShow: function(id) {
+    letterShow: function(id, mode) {
+        console.log(id);
+        console.log(mode);
+
         console.log('Card detail');
         $('.panels').hide();
         $('.panel-letter').show();
@@ -433,13 +470,11 @@ App.Router = Backbone.Router.extend({
                     App.cardDetailView.render();
                 },
                 "error": function(model, response, options) {
-                    // TODO Work around slow webhooks from Wufoo
-                    // Could use the ?success=true to know that this card *should* be there
-                    // Or could use a fragment, e.g., /letter/show/:id/success
-                    if ( response.status === 422 ) {
+                    if ( response.status === 422 && mode === 'success' ) {
                         // If the card isn't there right now
                         // it might be in a moment, so show a message to the user
-                        console.log('Got a 422');
+                        App.cardDetailErrorView = new App.CardDetailErrorView();
+                        App.cardDetailErrorView.render();
                     }
                 }
             });
@@ -448,7 +483,7 @@ App.Router = Backbone.Router.extend({
             App.cardDetailView.render();
         }
         if ( App.cardsListView ) {
-            // Hide the list?
+            // Hide the list
             App.cardsListView.hide();
         }
     },
@@ -457,21 +492,16 @@ App.Router = Backbone.Router.extend({
         $('.panels').hide();
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
-       // console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
     },
-
     trackPageView: function() {
         var url = Backbone.history.getFragment();
         // Add a slash if neccesary
         if (!/^\//.test(url)) url = '/' + url;
-        // Record page view
-        //console.log('trackPageView');
-        //console.log(url);
-        ga('send', {
+                ga('send', {
             'hitType': 'pageview',
-            'page': url
+        'page': url
         });
     }
 });
