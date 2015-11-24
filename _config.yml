@@ -1,5 +1,6 @@
 # Project settings - General
 version: 'v1.0.0' 
+name: "Buy Local"
 title: "Buy Local"
 description: "Send Holiday Greetings to your favourite local biz. (And win!)"
 baseurl: ""
