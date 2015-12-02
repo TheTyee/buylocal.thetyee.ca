@@ -37,7 +37,6 @@ App.updateMeta = function(model) {
     $("head").append('<meta property="twitter:image:src" content="' + App.rootUrl + '/ui/img/share-letter.png">');
 };
 
-
 // ===================================================================
 // Businesses
 // ===================================================================
@@ -45,7 +44,8 @@ App.Business = Backbone.Model.extend({
     defaults: {
         "businessName": "",
         "businessLocation": "",
-        "businessUrl": ""
+        "businessUrl": "",
+        "businessNamespace": ""
     },
     initialize: function(){
     },
@@ -55,7 +55,8 @@ App.Business = Backbone.Model.extend({
         return {
             "businessName": d.business_name,
             "businessLocation": d.business_city,
-            "businessUrl": d.business_url
+            "businessUrl": d.business_url,
+            "businessNamespace": d.business_name.replace(/\s+/g, '-').toLowerCase()
         };
     },
 });
@@ -81,6 +82,7 @@ App.BusinessesListView = Backbone.View.extend({
     collection: App.businesses,
     el: '#business-listing',
     events: {
+        "click .businesses div li": "showBusiness"
     },
     initialize: function () {
         this.listenTo(this.collection, 'update reset', this.render);
@@ -90,11 +92,23 @@ App.BusinessesListView = Backbone.View.extend({
         this.el.innerHTML = this.template();
         var target = this.$el.find(".businesses");
         this.collection.forEach(function (business, index) {
+            var cid = business.cid;
             target.append(new App.BusinessView({
                 model: business
             }).render().el);
         }, this);
         return this;
+    },
+
+    showBusiness: function(event){
+        BusinessInfo = App.businesses;
+        console.log($(event.currentTarget).data("business"));
+        //get identifier for what i clicked
+        //create new page at custom url
+        //put what i clicked on in the page
+
+        //event.preventDefault();
+       // App.router.navigate('business/show'+ business.cid, { trigger: true } );
     }
 });
 
@@ -492,6 +506,7 @@ App.Router = Backbone.Router.extend({
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
         App.businessDetailView = new App.BusinessDetailView({ model: business });
+        console.log(App.businessDetailView);
         App.businessDetailView.render();
     },
     trackPageView: function() {
