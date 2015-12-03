@@ -102,13 +102,9 @@ App.BusinessesListView = Backbone.View.extend({
 
     showBusiness: function(event){
         BusinessInfo = App.businesses;
-        console.log($(event.currentTarget).data("business"));
-        //get identifier for what i clicked
-        //create new page at custom url
-        //put what i clicked on in the page
-
-        //event.preventDefault();
-       // App.router.navigate('business/show'+ business.cid, { trigger: true } );
+        var namespaceUrl = $(event.currentTarget).data("business");
+        event.preventDefault();
+       App.router.navigate('business/show/'+ namespaceUrl, { trigger: true } );
     }
 });
 
@@ -117,14 +113,19 @@ App.BusinessDetailView = Backbone.View.extend({
     events: {
         "click .show-list": "showList"
     },
-    initialize: function (options) {
-        // TODO Update the meta when it makes sense to do so...
+    initialize: function () {
+       this.model = new App.Business();
+
+
     },
 
     template: _.template( $('#tpl_businessDetailView').html() ),
     render: function() {
+        $(this.el).append("<p>Sally</p>");
         this.$el.show();
-        this.$el.html(this.template(this.model.toJSON()));
+
+           this.$el.html(this.template(this.model.toJSON()));
+        //this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
     hide: function() {
@@ -506,7 +507,7 @@ App.Router = Backbone.Router.extend({
         $('.panel-business').show();
         var business = App.businesses.findWhere({"businessName": id });
         App.businessDetailView = new App.BusinessDetailView({ model: business });
-        console.log(App.businessDetailView);
+      //  console.log(App.businessDetailView);
         App.businessDetailView.render();
     },
     trackPageView: function() {
