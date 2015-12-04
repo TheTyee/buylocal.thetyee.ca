@@ -56,7 +56,7 @@ App.Business = Backbone.Model.extend({
             "businessName": d.business_name,
             "businessLocation": d.business_city,
             "businessUrl": d.business_url,
-            "businessNamespace": d.business_name.replace(/\s+/g, '-').toLowerCase()
+            "businessNamespace": d.business_name.replace(/\s+/g, '').replace(/\W/g, '-').toLowerCase()
         };
     },
 });
