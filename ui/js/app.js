@@ -56,7 +56,7 @@ App.Business = Backbone.Model.extend({
             "businessName": d.business_name,
             "businessLocation": d.business_city,
             "businessUrl": d.business_url,
-            "businessNamespace": d.business_name.replace(/\s+/g, '-').toLowerCase()
+            "businessNamespace": d.business_name.replace(/\W+/g, '').toLowerCase()
         };
     },
 });
@@ -117,10 +117,9 @@ App.BusinessDetailView = Backbone.View.extend({
 
     template: _.template( $('#tpl_businessDetailView').html() ),
     render: function() {
+        window.scrollTo(0, 0);
         this.$el.show();
-
-           this.$el.html(this.template(this.model.toJSON()));
-        //this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
     hide: function() {
