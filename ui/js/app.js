@@ -101,7 +101,6 @@ App.BusinessesListView = Backbone.View.extend({
     },
 
     showBusiness: function(event){
-        BusinessInfo = App.businesses;
         var namespaceUrl = $(event.currentTarget).data("business");
         event.preventDefault();
        App.router.navigate('business/show/'+ namespaceUrl, { trigger: true } );
@@ -435,7 +434,7 @@ App.Router = Backbone.Router.extend({
         "letters":            "showLetters",
         "businesses":            "showBusinesses",
         "letter/show/:id(/:mode)":    "letterShow",
-        "business/show/:id":    "businessShow"
+        "business/show/(:businessNamespace)":    "businessShow"
     },
     showFront: function() {
         //console.log('Front page');
@@ -501,11 +500,12 @@ App.Router = Backbone.Router.extend({
             App.cardsListView.hide();
         }
     },
-    businessShow: function(id) {
+    businessShow: function(namespaceUrl) {
        // console.log('Business detail');
         $('.panels').hide();
         $('.panel-business').show();
-        var business = App.businesses.findWhere({"businessName": id });
+        var business = App.businesses.findWhere({businessNamespace: namespaceUrl });
+        console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
       //  console.log(App.businessDetailView);
         App.businessDetailView.render();
