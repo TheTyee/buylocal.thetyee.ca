@@ -112,15 +112,11 @@ App.BusinessDetailView = Backbone.View.extend({
     events: {
         "click .show-list": "showList"
     },
-    initialize: function () {
-       this.model = new App.Business();
-
-
+    initialize: function (){
     },
 
     template: _.template( $('#tpl_businessDetailView').html() ),
     render: function() {
-        $(this.el).append("<p>Sally</p>");
         this.$el.show();
 
            this.$el.html(this.template(this.model.toJSON()));
@@ -507,6 +503,7 @@ App.Router = Backbone.Router.extend({
         var business = App.businesses.findWhere({businessNamespace: namespaceUrl });
         console.log(business);
         App.businessDetailView = new App.BusinessDetailView({ model: business });
+        console.log(App.businessDetailView);
       //  console.log(App.businessDetailView);
         App.businessDetailView.render();
     },
