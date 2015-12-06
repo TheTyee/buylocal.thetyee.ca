@@ -4,6 +4,7 @@
 //= require modernizr.js
 //= require bootstrap.js
 //= require underscore.js
+//= require underscore.string.js
 //= require backbone.js
 //= require backbone.paginator.js
 
