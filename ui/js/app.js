@@ -538,9 +538,14 @@ App.Router = Backbone.Router.extend({
        // console.log('Business detail');
         $('.panels').hide();
         $('.panel-business').show();
-        var business = App.businesses.findWhere({"businessName": id });
+        var business = App.businesses.findWhere({"businessSlug": id });
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
+        // Attach a card listing by business
+        App.businessCardsListView = new App.CardsListViewNoPromo();
+        // TODO should not be setting this directly!
+        App.businessCardsListView.collection.queryParams.query = business.get('businessName');
+        App.businessCardsListView.collection.fetch();
     },
     trackPageView: function() {
         var url = Backbone.history.getFragment();
