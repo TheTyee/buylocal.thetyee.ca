@@ -368,6 +368,48 @@ App.CardsListView = Backbone.View.extend({
     }
 });
 
+App.filteredCards = new App.Cards();
+App.CardsListViewNoPromo = Backbone.View.extend({
+    collection: App.filteredCards,
+    el: '#business-letters-list',
+    events: {
+        "click .card": "showCard",
+        "click li.next": function() { App.cards.getNextPage(); },
+        "click li.previous": function() { App.cards.getPreviousPage(); },
+        "click li.first": function() { App.cards.getFirstPage(); },
+        "click li.last": function() { App.cards.getLastPage(); },
+    },
+    initialize: function (options) {
+        this.listenTo(this.collection.fullCollection, 'update reset', this.render);
+        this.on('render', this.afterRender());
+    },
+    template: _.template( $('#tpl_cardListView').html() ),
+    render: function () {
+        this.$el.show();
+        this.el.innerHTML = this.template();
+        var target = this.$el.find(".letters");
+        this.collection.fullCollection.forEach(function (card, index) {
+            target.append(new App.CardView({
+                model: card
+            }).render().el);
+        }, this);
+        return this;
+    },
+    afterRender: function() {
+        // Not used, but useful! :-)
+    },
+    showCard: function(event) {
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var el = $(event.currentTarget);
+        var cardId = el.data("card");
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
+    },
+    hide: function() {
+        this.$el.hide();
+    }
+});
+
 App.CardsPreviewListView = Backbone.View.extend({
     collection: App.cards,
     el: '#recent-letters',
