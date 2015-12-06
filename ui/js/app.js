@@ -52,8 +52,9 @@ App.Business = Backbone.Model.extend({
     },
     parse: function(response, options) {
         var d = response;
-
+        var slug = s.slugify(d.business_name);
         return {
+            "businessSlug": slug,
             "businessName": d.business_name,
             "businessLocation": d.business_city,
             "businessUrl": d.business_url
