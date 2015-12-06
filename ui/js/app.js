@@ -212,7 +212,10 @@ App.Cards = Backbone.PageableCollection.extend({
     parse: function(response, options) {
         return response.data.letters;
     },
-    initialize: function() {
+    initialize: function(options) {
+        if (!_.isUndefined(options)) {
+            this.queryParams.filter = options.filter;
+        }
     },
     state: {
 
@@ -223,7 +226,8 @@ App.Cards = Backbone.PageableCollection.extend({
     },
     queryParams: {
         currentPage: "page",
-        pageSize: "limit"
+        pageSize: "limit",
+        query: this.filter
     }
 });
 
