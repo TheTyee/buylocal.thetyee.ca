@@ -26,6 +26,7 @@
     "mustache": "~2.2.0",
     "moment": "~2.10.6",
     "tabletop": "~1.4.2",
-    "backbone.paginator": "~2.0.2"
+    "backbone.paginator": "~2.0.2",
+    "underscore.string": "~3.2.2"
   }
 }
