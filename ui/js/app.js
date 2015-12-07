@@ -83,6 +83,7 @@ App.BusinessesListView = Backbone.View.extend({
     collection: App.businesses,
     el: '#business-listing',
     events: {
+        "click .business": "showBusiness",
     },
     initialize: function () {
         this.listenTo(this.collection, 'update reset', this.render);
@@ -97,7 +98,14 @@ App.BusinessesListView = Backbone.View.extend({
             }).render().el);
         }, this);
         return this;
-    }
+    },
+    showBusiness: function(event) {
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var el = $(event.currentTarget);
+        var businessId = el.data("business");
+        App.router.navigate('business/show/' + businessId, { trigger: true } );
+    },
 });
 
 App.BusinessDetailView = Backbone.View.extend({
