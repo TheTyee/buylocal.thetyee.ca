@@ -317,10 +317,10 @@ App.CardsListView = Backbone.View.extend({
     el: '#letters-list',
     events: {
         "click .card": "showCard",
-        "click li.next": function() { App.cards.getNextPage(); },
-        "click li.previous": function() { App.cards.getPreviousPage(); },
-        "click li.first": function() { App.cards.getFirstPage(); },
-        "click li.last": function() { App.cards.getLastPage(); },
+        "click li.next": function() { this.collection.getNextPage(); },
+        "click li.previous": function() { this.collection.getPreviousPage(); },
+        "click li.first": function() { this.collection.getFirstPage(); },
+        "click li.last": function() { this.collection.getLastPage(); },
     },
     initialize: function () {
         this.listenTo(this.collection.fullCollection, 'update reset', this.render);
