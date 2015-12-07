@@ -9,7 +9,7 @@
 </script>
 
 <script type="text/template" id="tpl_businessView">
-    <div id='<%= businessSlug %>'><strong><%= businessName %></strong>, <%= businessLocation %></div>
+    <div class='business' data-business='<%= businessSlug %>'><strong><%= businessName %></strong>, <%= businessLocation %></div>
 </script>
 
 <script type="text/template" id="tpl_businessListView">
@@ -19,7 +19,7 @@
 </script>
 
 <script type="text/template" id="tpl_businessDetailView">
-    <article data-business='<%= businessName %>' class='business-detail'>
+    <article data-business='<%= businessSlug %>' class='business-detail'>
         <header>
         </header>
         <p class="businessName"><%= businessName %>, <%= businessLocation %></p>
