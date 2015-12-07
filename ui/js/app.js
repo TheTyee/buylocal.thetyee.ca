@@ -374,10 +374,7 @@ App.CardsListViewNoPromo = Backbone.View.extend({
     el: '#business-letters-list',
     events: {
         "click .card": "showCard",
-        "click li.next": function() { App.cards.getNextPage(); },
-        "click li.previous": function() { App.cards.getPreviousPage(); },
-        "click li.first": function() { App.cards.getFirstPage(); },
-        "click li.last": function() { App.cards.getLastPage(); },
+        "click li.next": "getMore"
     },
     initialize: function (options) {
         this.listenTo(this.collection.fullCollection, 'update reset', this.render);
@@ -392,11 +389,20 @@ App.CardsListViewNoPromo = Backbone.View.extend({
             target.append(new App.CardView({
                 model: card
             }).render().el);
-        }, this);
+        }, this);    
         return this;
     },
     afterRender: function() {
         // Not used, but useful! :-)
+    },
+    getMore: function() {
+        var models = this.collection.fullCollection.length;
+        var self = this;
+        this.collection.getNextPage().done(function(res) {
+            if (res.data.letters.length === 0) { // no more data
+                $('#pagination').hide();
+            }
+        });
     },
     showCard: function(event) {
         event.preventDefault();
