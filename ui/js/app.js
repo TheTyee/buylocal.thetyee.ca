@@ -4,6 +4,7 @@
 //= require modernizr.js
 //= require bootstrap.js
 //= require underscore.js
+//= require underscore.string.js
 //= require backbone.js
 //= require backbone.paginator.js
 
@@ -51,8 +52,9 @@ App.Business = Backbone.Model.extend({
     },
     parse: function(response, options) {
         var d = response;
-
+        var slug = s.slugify(d.business_name);
         return {
+            "businessSlug": slug,
             "businessName": d.business_name,
             "businessLocation": d.business_city,
             "businessUrl": d.business_url
@@ -81,6 +83,7 @@ App.BusinessesListView = Backbone.View.extend({
     collection: App.businesses,
     el: '#business-listing',
     events: {
+        "click .business": "showBusiness",
     },
     initialize: function () {
         this.listenTo(this.collection, 'update reset', this.render);
@@ -95,7 +98,14 @@ App.BusinessesListView = Backbone.View.extend({
             }).render().el);
         }, this);
         return this;
-    }
+    },
+    showBusiness: function(event) {
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var el = $(event.currentTarget);
+        var businessId = el.data("business");
+        App.router.navigate('business/show/' + businessId, { trigger: true } );
+    },
 });
 
 App.BusinessDetailView = Backbone.View.extend({
@@ -210,7 +220,10 @@ App.Cards = Backbone.PageableCollection.extend({
     parse: function(response, options) {
         return response.data.letters;
     },
-    initialize: function() {
+    initialize: function(options) {
+        if (!_.isUndefined(options)) {
+            this.queryParams.filter = options.filter;
+        }
     },
     state: {
 
@@ -221,7 +234,8 @@ App.Cards = Backbone.PageableCollection.extend({
     },
     queryParams: {
         currentPage: "page",
-        pageSize: "limit"
+        pageSize: "limit",
+        query: this.filter
     }
 });
 
@@ -311,10 +325,10 @@ App.CardsListView = Backbone.View.extend({
     el: '#letters-list',
     events: {
         "click .card": "showCard",
-        "click li.next": function() { App.cards.getNextPage(); },
-        "click li.previous": function() { App.cards.getPreviousPage(); },
-        "click li.first": function() { App.cards.getFirstPage(); },
-        "click li.last": function() { App.cards.getLastPage(); },
+        "click li.next": function() { this.collection.getNextPage(); },
+        "click li.previous": function() { this.collection.getPreviousPage(); },
+        "click li.first": function() { this.collection.getFirstPage(); },
+        "click li.last": function() { this.collection.getLastPage(); },
     },
     initialize: function () {
         this.listenTo(this.collection.fullCollection, 'update reset', this.render);
@@ -349,6 +363,54 @@ App.CardsListView = Backbone.View.extend({
     },
     afterRender: function() {
         // Not used, but useful! :-)
+    },
+    showCard: function(event) {
+        event.preventDefault();
+        window.scrollTo(0, 0);
+        var el = $(event.currentTarget);
+        var cardId = el.data("card");
+        App.router.navigate('letter/show/' + cardId, { trigger: true } );
+    },
+    hide: function() {
+        this.$el.hide();
+    }
+});
+
+App.filteredCards = new App.Cards();
+App.CardsListViewNoPromo = Backbone.View.extend({
+    collection: App.filteredCards,
+    el: '#business-letters-list',
+    events: {
+        "click .card": "showCard",
+        "click li.next": "getMore"
+    },
+    initialize: function (options) {
+        this.listenTo(this.collection.fullCollection, 'update reset', this.render);
+        this.on('render', this.afterRender());
+    },
+    template: _.template( $('#tpl_cardListView').html() ),
+    render: function () {
+        this.$el.show();
+        this.el.innerHTML = this.template();
+        var target = this.$el.find(".letters");
+        this.collection.fullCollection.forEach(function (card, index) {
+            target.append(new App.CardView({
+                model: card
+            }).render().el);
+        }, this);    
+        return this;
+    },
+    afterRender: function() {
+        // Not used, but useful! :-)
+    },
+    getMore: function() {
+        var models = this.collection.fullCollection.length;
+        var self = this;
+        this.collection.getNextPage().done(function(res) {
+            if (res.data.letters.length === 0) { // no more data
+                $('#pagination').hide();
+            }
+        });
     },
     showCard: function(event) {
         event.preventDefault();
@@ -490,9 +552,14 @@ App.Router = Backbone.Router.extend({
        // console.log('Business detail');
         $('.panels').hide();
         $('.panel-business').show();
-        var business = App.businesses.findWhere({"businessName": id });
+        var business = App.businesses.findWhere({"businessSlug": id });
         App.businessDetailView = new App.BusinessDetailView({ model: business });
         App.businessDetailView.render();
+        // Attach a card listing by business
+        App.businessCardsListView = new App.CardsListViewNoPromo();
+        // TODO should not be setting this directly!
+        App.businessCardsListView.collection.queryParams.query = business.get('businessName');
+        App.businessCardsListView.collection.fetch();
     },
     trackPageView: function() {
         var url = Backbone.history.getFragment();
